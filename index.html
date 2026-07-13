@@ -1,9 +1,291 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-<title>Test</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>受験講座ダッシュボード</title>
+
+<style>
+body{
+ background:#f4f7fb;
+ font-family:sans-serif;
+ margin:0;
+ padding:15px;
+}
+
+h1{
+ margin-top:0;
+}
+
+.card{
+ background:white;
+ border-radius:16px;
+ padding:16px;
+ margin-bottom:16px;
+ box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.progress{
+ height:14px;
+ background:#ddd;
+ border-radius:99px;
+ overflow:hidden;
+}
+
+.fill{
+ height:100%;
+ background:#22c55e;
+}
+
+.row{
+ margin:10px 0;
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fill,24px);
+ gap:4px;
+}
+
+.box{
+ width:24px;
+ height:24px;
+ border-radius:5px;
+ border:1px solid #bbb;
+ cursor:pointer;
+}
+
+.lesson.done{
+ background:#22c55e;
+}
+
+.quiz.done{
+ background:#3b82f6;
+}
+
+.final.done{
+ background:#ef4444;
+}
+
+button{
+ border:none;
+ background:#2563eb;
+ color:white;
+ padding:10px;
+ border-radius:10px;
+}
+
+input{
+ padding:8px;
+ margin:5px;
+}
+
+small{
+ color:#666;
+}
+</style>
 </head>
+
 <body>
-<h1>GitHub Pages 成功！</h1>
+
+<h1>📚受験講座ダッシュボード</h1>
+
+<div class="card">
+<h2>共通テストまで</h2>
+<div id="days"></div>
+</div>
+
+<div class="card">
+<h2>全体進捗</h2>
+<div id="overallText"></div>
+<div class="progress">
+<div id="overallBar" class="fill"></div>
+</div>
+</div>
+
+<div class="card">
+<h2>講座追加</h2>
+
+<input id="name" placeholder="講座名">
+
+<input id="lessonCount" type="number" placeholder="授業数">
+
+<input id="quizCount" type="number" placeholder="確認テスト数">
+
+<input id="finalCount" type="number" placeholder="終了判定数">
+
+<button onclick="addCourse()">追加</button>
+</div>
+
+<div id="courses"></div>
+
+<script>
+
+const examDate=new Date("2027-01-16");
+
+const courses=
+JSON.parse(localStorage.getItem("courses"))||[];
+
+function save(){
+ localStorage.setItem("courses",
+ JSON.stringify(courses));
+}
+
+function toggle(type,course,index){
+
+ course[type][index]=!course[type][index];
+
+ save();
+
+ render();
+}
+
+function addCourse(){
+
+ const name=
+ document.getElementById("name").value;
+
+ const lesson=
+ Number(
+ document.getElementById("lessonCount").value);
+
+ const quiz=
+ Number(
+ document.getElementById("quizCount").value);
+
+ const finals=
+ Number(
+ document.getElementById("finalCount").value);
+
+ if(!name)return;
+
+ courses.push({
+  name,
+  lesson:Array(lesson).fill(false),
+  quiz:Array(quiz).fill(false),
+  final:Array(finals).fill(false)
+ });
+
+ save();
+
+ render();
+}
+
+function count(arr){
+ return arr.filter(x=>x).length;
+}
+
+function render(){
+
+ let html="";
+
+ let totalDone=0;
+ let totalItems=0;
+
+ courses.forEach((course,c)=>{
+
+   const done=
+   count(course.lesson)+
+   count(course.quiz)+
+   count(course.final);
+
+   const total=
+   course.lesson.length+
+   course.quiz.length+
+   course.final.length;
+
+   totalDone+=done;
+   totalItems+=total;
+
+   const percent=
+   total===0?0:
+   Math.round(done/total*100);
+
+   html+=`
+
+<div class="card">
+
+<h2>${course.name}</h2>
+
+<div>
+進捗 ${percent}%
+</div>
+
+<div class="progress">
+<div class="fill"
+style="width:${percent}%"></div>
+</div>
+
+<div class="row">
+<b>授業 ${count(course.lesson)}/${course.lesson.length}</b>
+
+<div class="grid">
+
+${course.lesson.map((x,i)=>
+`<div class="box lesson ${x?'done':''}"
+onclick="toggle('lesson',courses[${c}],${i})"></div>`
+).join("")}
+
+</div>
+</div>
+
+<div class="row">
+<b>確認テスト ${count(course.quiz)}/${course.quiz.length}</b>
+
+<div class="grid">
+
+${course.quiz.map((x,i)=>
+`<div class="box quiz ${x?'done':''}"
+onclick="toggle('quiz',courses[${c}],${i})"></div>`
+).join("")}
+
+</div>
+</div>
+
+<div class="row">
+<b>終了判定 ${count(course.final)}/${course.final.length}</b>
+
+<div class="grid">
+
+${course.final.map((x,i)=>
+`<div class="box final ${x?'done':''}"
+onclick="toggle('final',courses[${c}],${i})"></div>`
+).join("")}
+
+</div>
+</div>
+
+</div>
+`;
+ });
+
+ document.getElementById("courses")
+ .innerHTML=html;
+
+ let overall=
+ totalItems===0
+ ?0
+ :Math.round(totalDone/totalItems*100);
+
+ document.getElementById("overallText")
+ .innerHTML=
+ `${overall}% (${totalDone}/${totalItems})`;
+
+ document.getElementById("overallBar")
+ .style.width=
+ overall+"%";
+
+ const days=
+ Math.ceil(
+ (examDate-new Date())/86400000);
+
+ document.getElementById("days")
+ .innerHTML=`あと ${days} 日`;
+}
+
+render();
+
+</script>
+
 </body>
 </html>
