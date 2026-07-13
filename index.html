@@ -310,9 +310,9 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 await setDoc(
-  doc(db, "test", "sample"),
+  doc(db, "courses", "main"),
   {
-    message: "成功！"
+    courses: courses
   }
 );
 
