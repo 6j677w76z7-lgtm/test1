@@ -285,7 +285,37 @@ onclick="toggle('final',courses[${c}],${i})"></div>`
 
 render();
 
-</script>
+<script type="module">
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import {
+  getFirestore,
+  doc,
+  setDoc
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAhC-Ot5pmbkGhGoV8yFTz5ZjIK3EVObbw",
+  authDomain: "test1-5a7a3.firebaseapp.com",
+  projectId: "test1-5a7a3",
+  storageBucket: "test1-5a7a3.firebasestorage.app",
+  messagingSenderId: "43205620776",
+  appId: "1:43205620776:web:b73c37c0462f29cfb0b11d",
+  measurementId: "G-KVW1L9T7NV"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+await setDoc(
+  doc(db, "test", "sample"),
+  {
+    message: "成功！"
+  }
+);
+
+console.log("Firestore接続成功");
+
+</script>
 </body>
 </html>
