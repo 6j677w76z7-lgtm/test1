@@ -115,6 +115,19 @@ small{
 <input id="finalCount" type="number" placeholder="終了判定数">
 
 <button onclick="addCourse()">追加</button>
+function deleteCourse(index){
+
+  if(!confirm("この講座を削除しますか？")){
+    return;
+  }
+
+  courses.splice(index,1);
+
+  save();
+
+  render();
+}
+
 </div>
 
 <div id="courses"></div>
@@ -205,7 +218,13 @@ function render(){
 
 <div class="card">
 
-<h2>${course.name}</h2>
+<h2 style="display:flex;justify-content:space-between;align-items:center;">
+  ${course.name}
+  <button onclick="deleteCourse(${c})"
+          style="background:#ef4444;padding:6px 10px;">
+    🗑️
+  </button>
+</h2>
 
 <div>
 進捗 ${percent}%
