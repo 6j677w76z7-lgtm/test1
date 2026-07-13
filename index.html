@@ -140,7 +140,6 @@ function toggle(type,course,index){
 
  render();
 }
-
 function addCourse(){
 
  const name=
@@ -184,43 +183,6 @@ function deleteCourse(index){
 
  render();
 }
- 
-  courses.splice(index,1);
-
-  save();
-
-  render();
-}
-
- const name=
- document.getElementById("name").value;
-
- const lesson=
- Number(
- document.getElementById("lessonCount").value);
-
- const quiz=
- Number(
- document.getElementById("quizCount").value);
-
- const finals=
- Number(
- document.getElementById("finalCount").value);
-
- if(!name)return;
-
- courses.push({
-  name,
-  lesson:Array(lesson).fill(false),
-  quiz:Array(quiz).fill(false),
-  final:Array(finals).fill(false)
- });
-
- save();
-
- render();
-}
-
 function count(arr){
  return arr.filter(x=>x).length;
 }
