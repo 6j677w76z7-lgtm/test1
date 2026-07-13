@@ -115,18 +115,6 @@ small{
 <input id="finalCount" type="number" placeholder="終了判定数">
 
 <button onclick="addCourse()">追加</button>
-function deleteCourse(index){
-
-  if(!confirm("この講座を削除しますか？")){
-    return;
-  }
-
-  courses.splice(index,1);
-
-  save();
-
-  render();
-}
 
 </div>
 
@@ -154,6 +142,19 @@ function toggle(type,course,index){
 }
 
 function addCourse(){
+ 
+function deleteCourse(index){
+
+  if(!confirm("この講座を削除しますか？")){
+    return;
+  }
+
+  courses.splice(index,1);
+
+  save();
+
+  render();
+}
 
  const name=
  document.getElementById("name").value;
