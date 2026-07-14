@@ -116,8 +116,6 @@ small{
 
 <input id="lessonCount" type="number" placeholder="授業数">
 
-<input id="quizCount" type="number" placeholder="確認テスト数">
-
 <input id="finalCount" type="number" placeholder="終了判定数">
 
 <button onclick="addCourse()">追加</button>
@@ -158,10 +156,6 @@ function addCourse(){
  Number(
  document.getElementById("lessonCount").value);
 
- const quiz=
- Number(
- document.getElementById("quizCount").value);
-
  const finals=
  Number(
  document.getElementById("finalCount").value);
@@ -172,7 +166,7 @@ function addCourse(){
   subject,
   name,
   lesson:Array(lesson).fill(false),
-  quiz:Array(quiz).fill(false),
+  quiz:Array(lesson).fill(false),
   final:Array(finals).fill(false)
  });
 
