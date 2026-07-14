@@ -254,26 +254,40 @@ ${i+1}
 ).join("")}
 </div>
 
-<div style="display:flex;align-items:center;gap:8px;">
-<div style="width:40px;">授業</div>
+<div style="display:flex;align-items:center;margin-bottom:4px;">
 
-<div class="grid">
+<div style="width:50px;font-weight:bold;">
+授業
+</div>
+
+<div class="grid"
+style="grid-template-columns:repeat(${course.lesson.length},24px);">
+
 ${course.lesson.map((x,i)=>
 `<div class="box lesson ${x?'done':''}"
 onclick="toggle('lesson',courses[${c}],${i})"></div>`
 ).join("")}
-</div>
+
 </div>
 
-<div style="display:flex;align-items:center;gap:8px;margin-top:4px;">
-<div style="width:40px;">確認</div>
+</div>
 
-<div class="grid">
+<div style="display:flex;align-items:center;">
+
+<div style="width:50px;font-weight:bold;">
+確認
+</div>
+
+<div class="grid"
+style="grid-template-columns:repeat(${course.quiz.length},24px);">
+
 ${course.quiz.map((x,i)=>
 `<div class="box quiz ${x?'done':''}"
 onclick="toggle('quiz',courses[${c}],${i})"></div>`
 ).join("")}
+
 </div>
+
 </div>
 
 </div>
