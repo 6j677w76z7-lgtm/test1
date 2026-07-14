@@ -178,6 +178,15 @@ function toggle(type,course,index){
  save();
 
  render();
+ 
+ history.push({
+  date: today,
+  subject: course.subject,
+  course: course.name,
+  type: type,
+  number: index + 1
+});
+ 
 }
 function addCourse(){
  
