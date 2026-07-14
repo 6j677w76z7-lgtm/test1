@@ -83,12 +83,7 @@ input{
 small{
  color:#666;
 }
- 
-grid{
- display:grid;
- gap:4px;
- justify-content:start;
-}
+
  
 </style>
 </head>
@@ -256,9 +251,13 @@ style="width:${percent}%"></div>
 <div class="grid"
 style="grid-template-columns:repeat(${course.lesson.length},24px);">
 ${course.lesson.map((x,i)=>
-`<div style="font-size:11px;text-align:center">
+<div style="
+width:24px;
+text-align:center;
+font-size:11px;
+">
 ${i+1}
-</div>`
+</div>
 ).join("")}
 </div>
 
