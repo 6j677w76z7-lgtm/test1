@@ -171,6 +171,9 @@ const examDate=new Date("2027-01-16");
 const courses=
 JSON.parse(localStorage.getItem("courses"))||[];
 
+const history =
+JSON.parse(localStorage.getItem("history")) || [];
+
 function save(){
  localStorage.setItem("courses",
  JSON.stringify(courses));
