@@ -83,26 +83,59 @@ input{
 small{
  color:#666;
 }
+.top-area{
+ display:flex;
+ gap:16px;
+ margin-bottom:16px;
+}
 
- 
+.main-card{
+ flex:3;
+}
+
+.countdown-card{
+ flex:1;
+ text-align:center;
+}
+
+#daysBig{
+ font-size:42px;
+ font-weight:bold;
+ color:#2563eb;
+ margin:10px 0;
+}
+
 </style>
 </head>
 
 <body>
 
+<div class="top-area">
+
+<div class="card main-card">
+
 <h1>📚受験講座ダッシュボード</h1>
 
-<div class="card">
-<h2>共通テストまで</h2>
-<div id="days"></div>
-</div>
-
-<div class="card">
-<h2>全体進捗</h2>
 <div id="overallText"></div>
+
 <div class="progress">
 <div id="overallBar" class="fill"></div>
 </div>
+
+</div>
+
+<div class="card countdown-card">
+
+<div>🎯 共通テストまで</div>
+
+<div id="daysBig"></div>
+
+<div class="progress">
+<div id="dayBar" class="fill"></div>
+</div>
+
+</div>
+
 </div>
 
 <div class="card">
@@ -343,10 +376,20 @@ onclick="toggle('final',courses[${c}],${i})"></div>`
  Math.ceil(
  (examDate-new Date())/86400000);
 
- document.getElementById("days")
- .innerHTML=`あと ${days} 日`;
+document.getElementById("daysBig")
+.innerHTML=`${days}日`;
 }
 
+ const totalDays=550;
+
+const remainPercent=
+Math.max(0,days/totalDays*100);
+
+document
+.getElementById("dayBar")
+.style.width=
+remainPercent+"%";
+ 
 render();
 
 </script>
