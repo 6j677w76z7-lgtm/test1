@@ -139,8 +139,13 @@ small{
 </div>
 
 <div id="courses"></div>
-
+ 
 <div class="card">
+<h2>📝 最近の学習</h2>
+<div id="history"></div>
+</div>
+<div class="card">
+
 <h2>講座追加</h2>
  
 <select id="subject">
@@ -403,7 +408,23 @@ Math.ceil(
 
 document.getElementById("daysBig")
 .innerHTML=`${days}日`;
-
+ 
+document.getElementById("history")
+.innerHTML =
+history
+.slice(0,20)
+.map(h=>
+`
+<div style="margin:6px 0;">
+${h.date}
+<br>
+${h.subject}｜${h.course}
+<br>
+${h.type} ${h.number}
+</div>
+`
+).join("");
+ 
 const totalDays=550;
 
 const remainPercent=
