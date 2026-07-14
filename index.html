@@ -373,14 +373,13 @@ onclick="toggle('final',courses[${c}],${i})"></div>`
  overall+"%";
 
  const days=
- Math.ceil(
+Math.ceil(
  (examDate-new Date())/86400000);
 
 document.getElementById("daysBig")
 .innerHTML=`${days}日`;
-}
 
- const totalDays=550;
+const totalDays=550;
 
 const remainPercent=
 Math.max(0,days/totalDays*100);
@@ -389,6 +388,8 @@ document
 .getElementById("dayBar")
 .style.width=
 remainPercent+"%";
+
+}
  
 render();
 
