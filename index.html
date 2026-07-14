@@ -83,6 +83,13 @@ input{
 small{
  color:#666;
 }
+ 
+grid{
+ display:grid;
+ gap:4px;
+ justify-content:start;
+}
+ 
 </style>
 </head>
 
@@ -246,7 +253,8 @@ style="width:${percent}%"></div>
 <div class="row">
 <b>授業・確認テスト</b>
 
-<div class="grid">
+<div class="grid"
+style="grid-template-columns:repeat(${course.lesson.length},24px);">
 ${course.lesson.map((x,i)=>
 `<div style="font-size:11px;text-align:center">
 ${i+1}
