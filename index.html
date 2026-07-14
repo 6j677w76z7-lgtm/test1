@@ -251,13 +251,13 @@ style="width:${percent}%"></div>
 <div class="grid"
 style="grid-template-columns:repeat(${course.lesson.length},24px);">
 ${course.lesson.map((x,i)=>
-<div style="
+`<div style="
 width:24px;
 text-align:center;
 font-size:11px;
 ">
 ${i+1}
-</div>
+</div>`
 ).join("")}
 </div>
 
