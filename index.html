@@ -248,6 +248,13 @@ style="width:${percent}%"></div>
 
 <div class="grid">
 
+<div class="grid">
+${course.lesson.map((x,i)=>
+`<div style="font-size:11px;text-align:center">
+${i+1}
+</div>`
+).join("")}
+</div>
 ${course.lesson.map((x,i)=>
 `<div class="box lesson ${x?'done':''}"
 onclick="toggle('lesson',courses[${c}],${i})"></div>`
