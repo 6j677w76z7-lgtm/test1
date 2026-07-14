@@ -173,21 +173,37 @@ function save(){
 
 function toggle(type,course,index){
 
+ const before = course[type][index];
+
  course[type][index]=!course[type][index];
+
+ if(!before && course[type][index]){
+
+   const today =
+   new Date().toLocaleDateString("ja-JP");
+
+   history.unshift({
+     date: today,
+     subject: course.subject,
+     course: course.name,
+     type:
+       type==="lesson" ? "授業" :
+       type==="quiz" ? "確認" :
+       "終了判定",
+     number: index+1
+   });
+
+   localStorage.setItem(
+     "history",
+     JSON.stringify(history)
+   );
+ }
 
  save();
 
  render();
- 
- history.push({
-  date: today,
-  subject: course.subject,
-  course: course.name,
-  type: type,
-  number: index + 1
-});
- 
 }
+ 
 function addCourse(){
  
  const subject =
