@@ -268,6 +268,14 @@ onclick="toggle('lesson',courses[${c}],${i})"></div>`
 
 <div class="grid">
 
+<div class="grid">
+${course.quiz.map((x,i)=>
+`<div style="font-size:11px;text-align:center">
+${i+1}
+</div>`
+).join("")}
+</div>
+
 ${course.quiz.map((x,i)=>
 `<div class="box quiz ${x?'done':''}"
 onclick="toggle('quiz',courses[${c}],${i})"></div>`
