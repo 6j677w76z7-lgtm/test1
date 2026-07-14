@@ -248,6 +248,10 @@ style="width:${percent}%"></div>
 <div class="row">
 <b>授業・確認テスト</b>
 
+<div style="display:flex;align-items:center;">
+
+<div style="width:50px;"></div>
+
 <div class="grid"
 style="grid-template-columns:repeat(${course.lesson.length},24px);">
 ${course.lesson.map((x,i)=>
@@ -259,6 +263,8 @@ font-size:11px;
 ${i+1}
 </div>`
 ).join("")}
+</div>
+
 </div>
 
 <div style="display:flex;align-items:center;margin-bottom:4px;">
