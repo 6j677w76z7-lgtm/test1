@@ -95,8 +95,7 @@ small{
 <div id="days"></div>
 </div>
 
-<div class="card"
-style="border-left:8px solid ${subjectColors[course.subject]||'#999'}">
+<div class="card">
 <h2>全体進捗</h2>
 <div id="overallText"></div>
 <div class="progress">
@@ -149,7 +148,7 @@ function toggle(type,course,index){
 }
 function addCourse(){
  
-　const subject =
+ const subject =
 　document.getElementById("subject").value;
  
  const name=
@@ -230,7 +229,8 @@ function render(){
 
    html+=`
 
-<div class="card">
+<div class="card"
+style="border-left:8px solid ${subjectColors[course.subject] || '#999'}">
 
 <h2 style="display:flex;justify-content:space-between;align-items:center;">
 ${course.subject}｜${course.name}
