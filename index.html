@@ -129,7 +129,11 @@ small{
   margin-top:8px;
   font-weight:bold;
 }
-
+ 
+.countdown-card{
+ flex:1;
+ text-align:center;
+}
 </style>
 </head>
 
@@ -145,7 +149,9 @@ small{
    <div class="progress">
     <div id="overallBar" class="fill"></div>
    </div>
- 
+  </div>
+
+  <div class="card countdown-card">
    <div style="
    font-size:18px;
    font-weight:bold;
@@ -160,25 +166,65 @@ small{
    </div>
 
   </div>
+ </div>
+ 
+ <div class="top-area">
 
   <div class="card">
+    <h2>📚 Course Timer</h2>
 
-  <h2>Timer</h2>
+    <div id="courseTimer">00:00:00</div>
 
-  <div id="timer"
+    <button onclick="startCourseTimer()">
+      Start
+    </button>
+
+    <button onclick="stopCourseTimer()">
+      Stop
+    </button>
+  </div>
+
+  <div class="card">
+    <h2>⏱ Self Study</h2>
+
+    <div id="studyTimer">00:00:00</div>
+
+    <input
+      id="studyTitle"
+      placeholder="青チャート">
+
+    <button onclick="startStudyTimer()">
+      Start
+    </button>
+
+    <button onclick="stopStudyTimer()">
+      Stop
+    </button>
+
+    <button onclick="saveStudy()">
+      記録
+    </button>
+
+  </div>
+
+</div>
+ 
+<div class="card">
+
+ <h2>Timer</h2>
+
+ <div id="timer"
   style="font-size:36px;font-weight:bold;">
   00:00:00
-  </div>
+ </div>
 
-  <button onclick="startTimer()">
-  Start
-  </button>
+ <button onclick="startTimer()">
+ Start
+ </button>
 
-  <button onclick="stopTimer()">
-  Stop
-  </button>
-
-  </div>
+ <button onclick="stopTimer()">
+ Stop
+ </button>
 
  </div>
  
@@ -276,7 +322,12 @@ localStorage.setItem(
 
 const history =
 JSON.parse(localStorage.getItem("history")) || [];
-
+ 
+const studyHistory =
+JSON.parse(
+ localStorage.getItem("studyHistory")
+) || [];
+ 
 function save(){
  localStorage.setItem("courses",
  JSON.stringify(courses));
@@ -429,7 +480,7 @@ courses.filter(course=>{
    Math.round(done/total*100);
    
    const isComplete = percent === 100;
-   
+ 
    html+=`
  
 <div class="card"
