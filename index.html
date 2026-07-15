@@ -127,28 +127,19 @@ small{
 </head>
 
 <body>
-
 <div class="top-area">
 
 <div class="card main-card">
 
-<h1>Study board</h1>
+<h1>StudyBoard</h1>
 
-<div id="overallText"></div>
-
-<div class="progress">
-<div id="overallBar" class="fill"></div>
- 
-</div>
- 
-<div class="card main-card">
- <h1>StudyBoard</h1>
- <div style="
- font-size:14px;
- color:#666;
- margin-bottom:8px;">
+<div style="
+font-size:18px;
+font-weight:bold;
+color:#2563eb;
+margin-bottom:10px;">
  共テまで
- <span id="daysText"></span>
+<span id="daysBig"></span>
 </div>
 
 <div id="overallText"></div>
@@ -157,26 +148,31 @@ small{
 <div id="overallBar" class="fill"></div>
 </div>
 
+<div class="progress" style="margin-top:8px;">
+<div id="dayBar" class="fill"></div>
 </div>
+
 </div>
- 
+
 <div class="card">
-  <h2>Timer</h2>
 
-  <div id="timer"
-       style="font-size:36px;font-weight:bold;">
-    00:00:00
-  </div>
+<h2>Timer</h2>
 
-  <button onclick="startTimer()">
-    開始
-  </button>
-
-  <button onclick="stopTimer()">
-    停止
-  </button>
+<div id="timer"
+style="font-size:36px;font-weight:bold;">
+00:00:00
 </div>
- 
+
+<button onclick="startTimer()">
+開始
+</button>
+
+<button onclick="stopTimer()">
+停止
+</button>
+
+</div>
+
 </div>
 
 <div id="courses"></div>
