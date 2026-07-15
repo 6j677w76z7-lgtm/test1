@@ -144,16 +144,33 @@ small{
 
 <div class="card countdown-card">
 
-<div>🎯 共通テストまで</div>
+ <div>🎯 共通テストまで</div>
 
-<div id="daysBig"></div>
+ <div id="daysBig"></div>
 
-<div class="progress">
-<div id="dayBar" class="fill"></div>
+ <div class="progress">
+  <div id="dayBar" class="fill"></div>
+ </div>
+
 </div>
+ 
+<div class="card">
+  <h2>⏱ 今日の勉強時間</h2>
 
+  <div id="timer"
+       style="font-size:36px;font-weight:bold;">
+    00:00:00
+  </div>
+
+  <button onclick="startTimer()">
+    開始
+  </button>
+
+  <button onclick="stopTimer()">
+    停止
+  </button>
 </div>
-
+ 
 </div>
 
 <div id="courses"></div>
@@ -188,6 +205,42 @@ const examDate=new Date("2027-01-16");
 
 const courses=
 JSON.parse(localStorage.getItem("courses"))||[];
+
+const today =
+new Date().toLocaleDateString("ja-JP");
+
+const lastDate =
+localStorage.getItem("lastDate");
+
+if(lastDate && lastDate !== today){
+
+const studyHistory =
+  JSON.parse(
+    localStorage.getItem("studyHistory")
+  ) || [];
+
+  studyHistory.unshift({
+    date:lastDate,
+    seconds:Number(
+      localStorage.getItem("todaySeconds")
+    ) || 0
+  });
+
+  localStorage.setItem(
+    "studyHistory",
+    JSON.stringify(studyHistory)
+  );
+
+  localStorage.setItem(
+    "todaySeconds",
+    "0"
+  );
+}
+
+localStorage.setItem(
+  "lastDate",
+  today
+);
 
 const history =
 JSON.parse(localStorage.getItem("history")) || [];
