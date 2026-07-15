@@ -532,8 +532,63 @@ ${item.type}${item.number}
 `;
 }
  
+updateTimer();
+ 
 render();
+ 
+let seconds =
+Number(
+  localStorage.getItem("todaySeconds")
+) || 0;
 
+let timerId = null;
+
+function updateTimer(){
+
+  const h =
+  String(Math.floor(seconds/3600))
+  .padStart(2,"0");
+
+  const m =
+  String(Math.floor(seconds%3600/60))
+  .padStart(2,"0");
+
+  const s =
+  String(seconds%60)
+  .padStart(2,"0");
+
+  document.getElementById("timer")
+  .innerText =
+  `${h}:${m}:${s}`;
+}
+
+function startTimer(){
+
+  if(timerId) return;
+
+  timerId = setInterval(()=>{
+
+    seconds++;
+
+    localStorage.setItem(
+      "todaySeconds",
+      seconds
+    );
+
+    updateTimer();
+
+  },1000);
+
+}
+
+function stopTimer(){
+
+  clearInterval(timerId);
+
+  timerId = null;
+
+}
+ 
 </script>
 
 <script type="module">
