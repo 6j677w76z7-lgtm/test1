@@ -83,6 +83,7 @@ input{
 small{
  color:#666;
 }
+ 
 .top-area{
  display:flex;
  gap:16px;
@@ -146,6 +147,16 @@ small{
 .icon-btn:hover{
   background:#eef4ff;
   border-radius:8px;
+}
+
+.study-card{
+  flex:1.5;
+}
+ 
+#studyTimer{
+  font-size:42px;
+  font-weight:bold;
+  margin-bottom:10px;
 }
  
 </style>
@@ -228,8 +239,10 @@ small{
     ↻
     </button>
   
-    <button onclick="saveStudy()">
-      記録
+    <button
+     onclick="saveStudy()"
+     class="icon-btn">
+     ＋
     </button>
    
   </div>
