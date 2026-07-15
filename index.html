@@ -702,6 +702,54 @@ function stopTimer(){
 updateTimer();
  
 render();
+
+let studySeconds = 0;
+
+let studyTimerId = null;
+ 
+function updateStudyTimer(){
+
+const h =
+String(Math.floor(studySeconds/3600))
+ .padStart(2,"0");
+
+const m =
+String(Math.floor(studySeconds%3600/60))
+.padStart(2,"0");
+
+const s =
+String(studySeconds%60)
+.padStart(2,"0");
+  
+document.getElementById("studyTimer")
+.innerText =
+`${h}:${m}:${s}`;
+}
+ 
+function startStudyTimer(){
+  
+if(studyTimerId) return;
+  
+studyTimerId = setInterval(()=>{
+  
+studySeconds++;
+  
+updateStudyTimer();
+  
+},1000);
+  
+}
+
+function stopStudyTimer(){
+  
+clearInterval(studyTimerId);
+  
+studyTimerId = null;
+    
+}
+
+updateStudyTimer();
+ 
 </script>
 
 <script type="module">
