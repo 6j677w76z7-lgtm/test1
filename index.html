@@ -430,11 +430,6 @@ Math.ceil(
 document.getElementById("daysBig")
 .innerHTML=`${days}日`;
  
-document.getElementById("history")
-.innerHTML =
-history
-.slice(0,20)
-.map(h=>
 `
 <div style="margin:6px 0;">
 ${h.date}
@@ -455,19 +450,46 @@ document
 .getElementById("dayBar")
 .style.width=
 remainPercent+"%";
-
-}
- const grouped = {};
+const grouped = {};
 
 history.forEach(h=>{
   if(!grouped[h.date]){
     grouped[h.date]=[];
   }
-
   grouped[h.date].push(h);
 });
 
 document.getElementById("history").innerHTML =
+`
+<div class="history-week">
+
+${Object.entries(grouped)
+.slice(0,7)
+.map(([date,items])=>`
+
+<div class="day-card">
+
+<div class="day-title">
+${date}
+</div>
+
+${items.map(item=>`
+<div style="font-size:12px;margin:4px 0;">
+${item.course}
+<br>
+${item.type}${item.number}
+</div>
+`).join("")}
+
+</div>
+
+`).join("")}
+
+</div>
+`;
+ 
+}
+ 
 `
 <div class="history-week">
 
