@@ -93,11 +93,6 @@ small{
  flex:3;
 }
 
-.countdown-card{
- flex:1;
- text-align:center;
-}
-
 #daysBig{
  font-size:42px;
  font-weight:bold;
@@ -129,28 +124,27 @@ small{
 <body>
 <div class="top-area">
 
-<div class="card main-card">
+ <div class="card main-card">
 
-<h1>StudyBoard</h1>
+ <h1>StudyBoard</h1>
+ <div class="progress">
+  <div id="overallBar" class="fill"></div>
+ </div>
+  
+ <div style="
+ font-size:18px;
+ font-weight:bold;
+ color:#2563eb;
+ margin-bottom:10px;">
+  共テまで
+ <span id="daysBig"></span>
+ </div>
 
-<div style="
-font-size:18px;
-font-weight:bold;
-color:#2563eb;
-margin-bottom:10px;">
- 共テまで
-<span id="daysBig"></span>
-</div>
+ <div id="overallText"></div>
 
-<div id="overallText"></div>
-
-<div class="progress">
-<div id="overallBar" class="fill"></div>
-</div>
-
-<div class="progress" style="margin-top:8px;">
-<div id="dayBar" class="fill"></div>
-</div>
+ <div class="progress" style="margin-top:8px;">
+  <div id="dayBar" class="fill"></div>
+ </div>
 
 </div>
 
