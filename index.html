@@ -134,6 +134,16 @@ small{
  flex:1;
  text-align:center;
 }
+
+.icon-btn{
+ width:48px;
+ height:48px;
+ border-radius:50%;
+ font-size:24px;
+ font-weight:bold;
+ padding:0;
+}
+ 
 </style>
 </head>
 
@@ -178,16 +188,22 @@ small{
     00:00:00
    </div>
   
-   <button onclick="startTimer()">
-   Start
+   <button
+    id="timerButton"
+    onclick="toggleTimer()"
+    class="icon-btn">
+   ▷
    </button>
   
    <button onclick="stopTimer()">
    Stop
    </button>
-  <button onclick="resetTimer()">
-   Reset
-  </button>
+   
+   <button
+   onclick="resetTimer()"
+   class="icon-btn">
+   ↻
+   </button>
   
   </div>
   <div class="card">
@@ -199,8 +215,11 @@ small{
       id="studyTitle"
       placeholder="青チャート">
 
-    <button onclick="startStudyTimer()">
-      Start
+    <button
+    id="studyButton"
+    onclick="toggleStudyTimer()"
+    class="icon-btn">
+    ▷
     </button>
 
     <button onclick="stopStudyTimer()">
@@ -211,8 +230,10 @@ small{
       記録
     </button>
    
-    <button onclick="resetStudyTimer()">
-    Reset
+    <button
+     onclick="resetStudyTimer()"
+     class="icon-btn">
+    ↻
     </button>
   
   </div>
@@ -716,7 +737,47 @@ function resetTimer(){
   
    updateTimer();
   }
- 
+ let timerRunning = false;
+
+function toggleTimer(){
+
+ if(timerRunning){
+
+  clearInterval(timerId);
+
+  timerId = null;
+
+  timerRunning = false;
+
+ }else{
+
+  timerId = setInterval(()=>{
+
+   seconds++;
+
+   localStorage.setItem(
+    "todaySeconds",
+    seconds
+   );
+
+   updateTimer();
+
+  },1000);
+
+  timerRunning = true;
+ }
+
+ updateTimerButton();
+}
+
+function updateTimerButton(){
+
+ document.getElementById("timerButton")
+ .innerText =
+ timerRunning ? "▌▌" : "▷";
+
+}
+
 
  
 let studySeconds =
@@ -788,10 +849,53 @@ function resetStudyTimer(){
 );
  
 }
- 
+let studyRunning = false;
+
+function toggleStudyTimer(){
+
+ if(studyRunning){
+
+  clearInterval(studyTimerId);
+
+  studyTimerId = null;
+
+  studyRunning = false;
+
+ }else{
+
+  studyTimerId = setInterval(()=>{
+
+   studySeconds++;
+
+   localStorage.setItem(
+    "studySeconds",
+    studySeconds
+   );
+
+   updateStudyTimer();
+
+  },1000);
+
+  studyRunning = true;
+ }
+
+ updateStudyButton();
+}
+
+function updateStudyButton(){
+
+ document.getElementById("studyButton")
+ .innerText =
+ studyRunning ? "▌▌" : "▷";
+
+}
+updateTimerButton();
+updateStudyButton();
 updateStudyTimer();
 updateTimer();
 render();
+
+
  
 </script>
 
