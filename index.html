@@ -372,6 +372,9 @@ courses.filter(course=>{
 [...activeCourses, ...completedCourses]
 .forEach((course)=>{
 
+ const originalIndex =
+ courses.indexOf(course);
+
    const done=
    count(course.lesson)+
    count(course.quiz)+
@@ -396,7 +399,7 @@ style="border-left:8px solid ${subjectColors[course.subject] || '#999'}">
 
 <h2 style="display:flex;justify-content:space-between;align-items:center;">
 ${course.subject}｜${course.name}
-<button onclick="deleteCourse(${c})"
+<button onclick="deleteCourse(${originalIndex})"
 style="background:#ef4444;padding:6px 10px;">
 🗑️
 </button>
@@ -444,7 +447,7 @@ style="grid-template-columns:repeat(${course.lesson.length},24px);">
 
 ${course.lesson.map((x,i)=>
 `<div class="box lesson ${x?'done':''}"
-onclick="toggle('lesson',courses[${c}],${i})"></div>`
+onclick="toggle('lesson',courses[${originalIndex}],${i})"></div>`
 ).join("")}
 
 </div>
@@ -462,7 +465,7 @@ style="grid-template-columns:repeat(${course.quiz.length},24px);">
 
 ${course.quiz.map((x,i)=>
 `<div class="box quiz ${x?'done':''}"
-onclick="toggle('quiz',courses[${c}],${i})"></div>`
+onclick="toggle('quiz',courses[${originalIndex}],${i})"></div>`
 ).join("")}
 
 </div>
@@ -479,7 +482,7 @@ onclick="toggle('quiz',courses[${c}],${i})"></div>`
 
 ${course.final.map((x,i)=>
 `<div class="box final ${x?'done':''}"
-onclick="toggle('final',courses[${c}],${i})"></div>`
+onclick="toggle('final',courses[${originalIndex}],${i})"></div>`
 ).join("")}
 
 </div>
