@@ -104,6 +104,24 @@ small{
  color:#2563eb;
  margin:10px 0;
 }
+ 
+.history-week{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+}
+
+.day-card{
+  min-width:140px;
+  background:#f8fafc;
+  border-radius:12px;
+  padding:10px;
+}
+
+.day-title{
+  font-weight:bold;
+  margin-bottom:8px;
+}
 
 </style>
 </head>
@@ -439,6 +457,44 @@ document
 remainPercent+"%";
 
 }
+ const grouped = {};
+
+history.forEach(h=>{
+  if(!grouped[h.date]){
+    grouped[h.date]=[];
+  }
+
+  grouped[h.date].push(h);
+});
+
+document.getElementById("history").innerHTML =
+`
+<div class="history-week">
+
+${Object.entries(grouped)
+.slice(0,7)
+.map(([date,items])=>`
+
+<div class="day-card">
+
+<div class="day-title">
+${date}
+</div>
+
+${items.map(item=>`
+<div style="font-size:12px;margin:4px 0;">
+${item.course}
+<br>
+${item.type}${item.number}
+</div>
+`).join("")}
+
+</div>
+
+`).join("")}
+
+</div>
+`;
  
 render();
 
