@@ -534,9 +534,6 @@ ${item.type}${item.number}
 `;
 }
  
-updateTimer();
- 
-render();
  
 let seconds =
 Number(
@@ -544,7 +541,7 @@ Number(
 ) || 0;
 
 let timerId = null;
-
+ 
 function updateTimer(){
 
   const h =
@@ -591,6 +588,9 @@ function stopTimer(){
 
 }
  
+updateTimer();
+ 
+render();
 </script>
 
 <script type="module">
