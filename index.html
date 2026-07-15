@@ -726,18 +726,35 @@ function toggleTimer(){
     localStorage.removeItem(
       "timerStartTime"
     );
+   
   }else{
+
+  studyStartTime = Date.now();
+
+  localStorage.setItem(
+    "studyStartTime",
+    studyStartTime
+  );
+
+  studyRunning = true;
+
+  // Timerも開始
+  if(!timerRunning){
 
     startTime = Date.now();
 
     localStorage.setItem(
-       "timerStartTime",
-       startTime
-     );
-   
+      "timerStartTime",
+      startTime
+    );
+
     timerRunning = true;
-   
+
+    updateTimerButton();
+
   }
+
+}
 
  updateTimerButton();
 }
@@ -840,22 +857,56 @@ function toggleStudyTimer(){
   localStorage.removeItem(
   "studyStartTime"
   );
-  
- }else{
+   if(timerRunning){
+
+   const timerElapsed =
+   Math.floor(
+     (Date.now()-startTime)/1000
+   );
+
+   seconds += timerElapsed;
+    
+   localStorage.setItem(
+     "todaySeconds",
+     seconds
+   );
+
+   timerRunning = false;
+
+   startTime = null;
+
+   localStorage.removeItem(
+     "timerStartTime"
+   );
+
+   updateTimerButton();
+ }
+ 
+}else{
 
   studyStartTime = Date.now();
 
-  studyRunning = true;
   localStorage.setItem(
-     "studyStartTime",
-     studyStartTime
-   );
-  
- }
+    "studyStartTime",
+    studyStartTime
+  );
 
- updateStudyButton();
+  studyRunning = true;
+
+  if(!timerRunning){
+
+    startTime = Date.now();
+
+    localStorage.setItem(
+      "timerStartTime",
+      startTime
+    );
+
+    timerRunning = true;
+
+    updateTimerButton();
+  }
 }
-
 function updateStudyTimer(){
 
  let currentSeconds = studySeconds;
