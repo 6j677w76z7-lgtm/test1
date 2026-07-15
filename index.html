@@ -403,11 +403,14 @@ ${isComplete ? 'background:#ecfdf5;' : ''}
 ">
 
 <h2 style="display:flex;justify-content:space-between;align-items:center;">
-${course.subject}｜${course.name}
-<button onclick="deleteCourse(${originalIndex})"
-style="background:#ef4444;padding:6px 10px;">
-🗑️
-</button>
+ <span>
+  ${isComplete ? '🌸 ' : ''}
+  ${course.subject}｜${course.name}
+ </span>
+ <button onclick="deleteCourse(${originalIndex})"
+  style="background:#ef4444;padding:6px 10px;">
+  🗑️
+ </button>
 </h2>
 
 <div>
