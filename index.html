@@ -907,7 +907,7 @@ function toggleStudyTimer(){
     updateTimerButton();
   }
  }
- 
+}
  
 function updateStudyTimer(){
 
@@ -951,11 +951,7 @@ function resetStudyTimer(){
   0
  );
 
- updateStudyTimer();
- updateStudyButton();
-}
-
-function updateStudyButton(){
+ function updateStudyButton(){
 
  document.getElementById(
   "studyButton"
@@ -963,8 +959,11 @@ function updateStudyButton(){
  studyRunning ? "Ⅱ" : "▷";
 
 }
-
+ 
+ updateStudyTimer();
+ updateStudyButton();
 }
+
  
 setInterval(updateTimer,1000);
 setInterval(updateStudyTimer,1000);
