@@ -369,7 +369,8 @@ courses.filter(course=>{
  return done >= total;
 });
  
- courses.forEach((course,c)=>{
+[...activeCourses, ...completedCourses]
+.forEach((course)=>{
 
    const done=
    count(course.lesson)+
