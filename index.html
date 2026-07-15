@@ -686,6 +686,38 @@ ${item.type}${item.number}
 
 
  
+function saveStudy(){
+
+ const title =
+ document.getElementById("studyTitle").value;
+
+ if(!title) return;
+
+ studyHistory.unshift({
+
+  date:new Date()
+   .toLocaleDateString("ja-JP"),
+
+  category:"study",
+
+  title:title,
+
+  minutes:
+   Math.round(studySeconds/60)
+
+ });
+
+ localStorage.setItem(
+  "studyHistory",
+  JSON.stringify(studyHistory)
+ );
+
+ resetStudyTimer();
+
+}
+
+ 
+
 
  
 let seconds =
