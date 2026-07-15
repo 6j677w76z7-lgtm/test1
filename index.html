@@ -371,6 +371,7 @@ function toggle(type,course,index){
 
    history.unshift({
      date: today,
+     timestamp: Date.now(),
      subject: course.subject,
      course: course.name,
      type:
@@ -645,9 +646,15 @@ document
 .style.width=
 remainPercent+"%";
 
+const merged = [
+  ...history,
+  ...studyHistory
+];
+
 const grouped = {};
 
-history.forEach(h=>{
+merged.forEach(h=>{
+
   if(!grouped[h.date]){
     grouped[h.date]=[];
   }
@@ -665,15 +672,27 @@ ${Object.entries(grouped)
 <div class="day-card">
 
 <div class="day-title">
-${date}
+ ${date}
 </div>
 
 ${items.map(item=>`
+
 <div style="font-size:12px;margin:4px 0;">
-${item.course}
-<br>
-${item.type}${item.number}
+
+${
+ item.category === "study"
+ ?
+ `⏱ ${item.title}
+ <br>
+ ${item.minutes}分`
+ :
+ `📚 ${item.course}
+ <br>
+ ${item.type}${item.number}`
+}
+
 </div>
+
 `).join("")}
 
 </div>
@@ -712,6 +731,22 @@ function saveStudy(){
   JSON.stringify(studyHistory)
  );
 
+ studyHistory.unshift({
+
+  date:new Date()
+   .toLocaleDateString("ja-JP"),
+
+  timestamp: Date.now(),
+
+  category:"study",
+
+  title:title,
+
+  minutes:
+   Math.round(studySeconds/60)
+
+  });
+ 
  resetStudyTimer();
 
 }
