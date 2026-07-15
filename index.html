@@ -686,20 +686,66 @@ Number(
   localStorage.getItem("todaySeconds")
 ) || 0;
 
-let timerId = null;
- 
+let startTime = null;
+
+let timerRunning = false;
+
+function toggleTimer(){
+
+  if(timerRunning){
+
+    const elapsed =
+    Math.floor(
+      (Date.now() - startTime) / 1000
+    );
+
+    seconds += elapsed;
+
+    localStorage.setItem(
+      "todaySeconds",
+      seconds
+    );
+
+    timerRunning = false;
+
+    startTime = null;
+
+  }else{
+
+    startTime = Date.now();
+
+    timerRunning = true;
+
+  }
+
+}
+
+ updateTimerButton();
+}
+
 function updateTimer(){
 
+  let currentSeconds = seconds;
+
+  if(timerRunning){
+
+    currentSeconds += Math.floor(
+      (Date.now() - startTime) / 1000
+    );
+
+  }
+
   const h =
-  String(Math.floor(seconds/3600))
+  String(Math.floor(currentSeconds/3600))
   .padStart(2,"0");
 
   const m =
-  String(Math.floor(seconds%3600/60))
-  .padStart(2,"0");
+  String(
+    Math.floor(currentSeconds%3600/60)
+  ).padStart(2,"0");
 
   const s =
-  String(seconds%60)
+  String(currentSeconds%60)
   .padStart(2,"0");
 
   document.getElementById("timer")
@@ -707,190 +753,106 @@ function updateTimer(){
   `${h}:${m}:${s}`;
 }
 
-function startTimer(){
+setInterval(updateTimer,1000);
 
-  if(timerId) return;
-
-  timerId = setInterval(()=>{
-
-    seconds++;
-
-    localStorage.setItem(
-      "todaySeconds",
-      seconds
-    );
-
-    updateTimer();
-
-  },1000);
-
-}
-
-function stopTimer(){
-
-  clearInterval(timerId);
-
-  timerId = null;
-
-}
 function resetTimer(){
-  
-   stopTimer();
-  
-   seconds = 0;
-  
-   localStorage.setItem(
-     "todaySeconds",
-     0
-   );
-  
-   updateTimer();
-  }
- let timerRunning = false;
-
-function toggleTimer(){
-
- if(timerRunning){
-
-  clearInterval(timerId);
-
-  timerId = null;
 
   timerRunning = false;
 
- }else{
+  startTime = null;
 
-  timerId = setInterval(()=>{
+  seconds = 0;
 
-   seconds++;
-
-   localStorage.setItem(
+  localStorage.setItem(
     "todaySeconds",
-    seconds
-   );
+    0
+  );
 
-   updateTimer();
-
-  },1000);
-
-  timerRunning = true;
- }
-
- updateTimerButton();
+  updateTimer();
 }
+
+updateTimerButton();
 
 function updateTimerButton(){
 
- document.getElementById("timerButton")
- .innerText =
+ document.getElementById(
+  "timerButton"
+ ).innerText =
  timerRunning ? "Ⅱ" : "▷";
 
 }
 
 
+
  
-let studySeconds =
+let seconds =
 Number(
-  localStorage.getItem("studySeconds")
+  localStorage.getItem("todaySeconds")
 ) || 0;
 
-let studyTimerId = null;
+let startTime = null;
+
+let timerRunning = false;
+
+function toggleTimer(){
+
+  if(studyRunning){
+
+    const elapsed =
+    Math.floor(
+      (Date.now() - studyStartTime) / 1000
+    );
+
+    studySeconds += elapsed;
+
+    localStorage.setItem(
+      "todaySeconds",
+      studySeconds
+    );
+
+    studyRunning = false;
+
+    studyStartTime = null;
+
+  }else{
+
+    studyStartTime = Date.now();
+
+    studyRunning = true;
+
+  }
+
+}
+function updateTimer(){
+
+  let currentSeconds = studySeconds;
+
+  if(studyRunning){
+
+    currentSeconds += Math.floor(
+      (Date.now() - studyStartTime) / 1000
+    );
+
+  }
+
+  const h =
+  String(Math.floor(currentSeconds/3600))
+  .padStart(2,"0");
+
+  const m =
+  String(
+    Math.floor(currentSeconds%3600/60)
+  ).padStart(2,"0");
+
+  const s =
+  String(currentSeconds%60)
+  .padStart(2,"0");
+
+  document.getElementById("timer")
+  .innerText =
+  `${h}:${m}:${s}`;
+}
  
-function updateStudyTimer(){
-
-const h =
-String(Math.floor(studySeconds/3600))
- .padStart(2,"0");
-
-const m =
-String(Math.floor(studySeconds%3600/60))
-.padStart(2,"0");
-
-const s =
-String(studySeconds%60)
-.padStart(2,"0");
-  
-document.getElementById("studyTimer")
-.innerText =
-`${h}:${m}:${s}`;
-}
-
-function startStudyTimer(){
-  
-if(studyTimerId) return;
-  
-studyTimerId = setInterval(()=>{
-  
-studySeconds++;
-
-localStorage.setItem(
-  "studySeconds",
-  studySeconds
-);
-
-updateStudyTimer();
-  
-},1000);
-  
-}
-
-function stopStudyTimer(){
-  
- clearInterval(studyTimerId);
-  
- studyTimerId = null;
-    
-}
-
-updateStudyTimer();
- 
-function resetStudyTimer(){
-
- stopStudyTimer();
-
- studySeconds = 0;
-
- updateStudyTimer();
-
- localStorage.setItem(
-  "studySeconds",
-  0
-);
- 
-}
-let studyRunning = false;
-
-function toggleStudyTimer(){
-
- if(studyRunning){
-
-  clearInterval(studyTimerId);
-
-  studyTimerId = null;
-
-  studyRunning = false;
-
- }else{
-
-  studyTimerId = setInterval(()=>{
-
-   studySeconds++;
-
-   localStorage.setItem(
-    "studySeconds",
-    studySeconds
-   );
-
-   updateStudyTimer();
-
-  },1000);
-
-  studyRunning = true;
- }
-
- updateStudyButton();
-}
-
 function updateStudyButton(){
 
  document.getElementById("studyButton")
@@ -898,6 +860,36 @@ function updateStudyButton(){
  studyRunning ? "Ⅱ" : "▷";
 
 }
+ 
+setInterval(updateTimer,1000);
+
+function resetTimer(){
+
+  studyRunning = false;
+
+  studyStartTime = null;
+
+  studySeconds = 0;
+
+  localStorage.setItem(
+    "todaySeconds",
+    0
+  );
+
+  updateTimer();
+}
+ 
+updateTimerButton();
+ 
+function updateTimerButton(){
+
+ document.getElementById(
+  "timerButton"
+ ).innerText =
+ studyRunning ? "Ⅱ" : "▷";
+
+} 
+ 
 updateTimerButton();
 updateStudyButton();
 updateStudyTimer();
