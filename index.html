@@ -717,10 +717,6 @@ function resetTimer(){
    updateTimer();
   }
  
-updateTimer();
- 
-render();
-
 
  
 let studySeconds = 0;
@@ -779,9 +775,9 @@ function resetStudyTimer(){
  updateStudyTimer();
 }
  
- updateStudyTimer();
-
- render();
+updateStudyTimer();
+updateTimer();
+render();
  
 </script>
 
