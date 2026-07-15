@@ -117,6 +117,18 @@ small{
   font-weight:bold;
   margin-bottom:8px;
 }
+ 
+.collapsed{
+  max-height:140px;
+  overflow:hidden;
+}
+
+.show-more{
+  color:#2563eb;
+  cursor:pointer;
+  margin-top:8px;
+  font-weight:bold;
+}
 
 </style>
 </head>
@@ -171,8 +183,15 @@ small{
  </div>
  
  <div class="card">
-  <div id="history"></div>
- </div>
+
+  <div id="history" class="collapsed"></div>
+
+  <div class="show-more"
+       onclick="toggleHistory()"
+       id="historyButton">
+    ▼ もっと見る
+  </div>
+</div>
  
 <div id="courses"></div>
   
@@ -196,7 +215,24 @@ small{
 </div>
 
 <script>
+function toggleHistory(){
 
+ const historyDiv =
+ document.getElementById("history");
+
+ const button =
+ document.getElementById("historyButton");
+
+ historyDiv.classList.toggle("collapsed");
+
+ if(historyDiv.classList.contains("collapsed")){
+   button.innerText = "▼ もっと見る";
+ }else{
+   button.innerText = "▲ 閉じる";
+ }
+ 
+ }
+ 
 const examDate=new Date("2027-01-16");
 
 const courses=
@@ -395,7 +431,7 @@ courses.filter(course=>{
    const isComplete = percent === 100;
    
    html+=`
-
+ 
 <div class="card"
 style="
 border-left:8px solid ${subjectColors[course.subject] || '#999'};
