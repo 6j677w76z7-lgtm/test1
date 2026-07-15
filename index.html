@@ -732,7 +732,7 @@ function toggleTimer(){
   studyStartTime = Date.now();
 
   localStorage.setItem(
-    "studyStartTime",
+    "timerStartTime",
     studyStartTime
   );
 
@@ -894,19 +894,21 @@ function toggleStudyTimer(){
   studyRunning = true;
 
   if(!timerRunning){
-
+  
     startTime = Date.now();
-
+  
     localStorage.setItem(
       "timerStartTime",
       startTime
     );
-
+  
     timerRunning = true;
-
+  
     updateTimerButton();
   }
+ }
 }
+ 
 function updateStudyTimer(){
 
  let currentSeconds = studySeconds;
