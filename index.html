@@ -159,6 +159,10 @@ small{
   margin-bottom:10px;
 }
  
+.timer-card{
+  flex:1;
+}
+
 </style>
 </head>
 
@@ -194,7 +198,7 @@ small{
  </div>
  
  <div class="top-area">
-  <div class="card">
+  <div class="card study-card">
   
    <h2>Timer</h2>
   
@@ -217,7 +221,7 @@ small{
    </button>
   
   </div>
-  <div class="card">
+  <div class="card study-card">
     <h2>Self Study</h2>
 
     <div id="studyTimer">00:00:00</div>
@@ -718,8 +722,6 @@ function toggleTimer(){
 
   }
 
-}
-
  updateTimerButton();
 }
 
@@ -752,8 +754,6 @@ function updateTimer(){
   .innerText =
   `${h}:${m}:${s}`;
 }
-
-setInterval(updateTimer,1000);
 
 function resetTimer(){
 
@@ -794,8 +794,6 @@ let studyStartTime = null;
 
 let studyRunning = false;
 
----
-
 function toggleStudyTimer(){
 
  if(studyRunning){
@@ -827,8 +825,6 @@ function toggleStudyTimer(){
  updateStudyButton();
 }
 
----
-
 function updateStudyTimer(){
 
  let currentSeconds = studySeconds;
@@ -858,8 +854,6 @@ function updateStudyTimer(){
  `${h}:${m}:${s}`;
 }
 
----
-
 function resetStudyTimer(){
 
  studyRunning = false;
@@ -876,8 +870,6 @@ function resetStudyTimer(){
  updateStudyTimer();
  updateStudyButton();
 }
-
----
 
 function updateStudyButton(){
 
