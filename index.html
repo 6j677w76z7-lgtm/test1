@@ -391,11 +391,16 @@ courses.filter(course=>{
    const percent=
    total===0?0:
    Math.round(done/total*100);
-
+   
+   const isComplete = percent === 100;
+   
    html+=`
 
 <div class="card"
-style="border-left:8px solid ${subjectColors[course.subject] || '#999'}">
+style="
+border-left:8px solid ${subjectColors[course.subject] || '#999'};
+${isComplete ? 'background:#ecfdf5;' : ''}
+">
 
 <h2 style="display:flex;justify-content:space-between;align-items:center;">
 ${course.subject}｜${course.name}
