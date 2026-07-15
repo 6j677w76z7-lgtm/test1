@@ -431,15 +431,6 @@ document.getElementById("daysBig")
 .innerHTML=`${days}日`;
  
 `
-<div style="margin:6px 0;">
-${h.date}
-<br>
-${h.subject}｜${h.course}
-<br>
-${h.type} ${h.number}
-</div>
-`
-).join("");
  
 const totalDays=550;
 
@@ -450,6 +441,7 @@ document
 .getElementById("dayBar")
 .style.width=
 remainPercent+"%";
+
 const grouped = {};
 
 history.forEach(h=>{
@@ -487,36 +479,7 @@ ${item.type}${item.number}
 
 </div>
 `;
- 
 }
- 
-`
-<div class="history-week">
-
-${Object.entries(grouped)
-.slice(0,7)
-.map(([date,items])=>`
-
-<div class="day-card">
-
-<div class="day-title">
-${date}
-</div>
-
-${items.map(item=>`
-<div style="font-size:12px;margin:4px 0;">
-${item.course}
-<br>
-${item.type}${item.number}
-</div>
-`).join("")}
-
-</div>
-
-`).join("")}
-
-</div>
-`;
  
 render();
 
