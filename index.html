@@ -712,11 +712,6 @@ function saveStudy(){
 
  if(!title) return;
 
- localStorage.setItem(
-  "studyHistory",
-  JSON.stringify(studyHistory)
- );
-
  studyHistory.unshift({
 
   date:new Date()
@@ -732,6 +727,11 @@ function saveStudy(){
    Math.round(studySeconds/60)
 
   });
+ 
+  localStorage.setItem(
+  "studyHistory",
+  JSON.stringify(studyHistory)
+ );
  
  resetStudyTimer();
 
