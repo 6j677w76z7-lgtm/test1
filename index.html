@@ -185,6 +185,9 @@ small{
    <button onclick="stopTimer()">
    Stop
    </button>
+  <button onclick="resetTimer()">
+   Reset
+  </button>
   
   </div>
   <div class="card">
@@ -207,7 +210,11 @@ small{
     <button onclick="saveStudy()">
       記録
     </button>
-
+   
+    <button onclick="resetTimer()">
+    Reset
+    </button>
+  
   </div>
   
 </div>
@@ -696,6 +703,19 @@ function stopTimer(){
   timerId = null;
 
 }
+function resetTimer(){
+  
+   stopTimer();
+  
+   seconds = 0;
+  
+   localStorage.setItem(
+     "todaySeconds",
+     0
+   );
+  
+   updateTimer();
+  }
  
 updateTimer();
  
@@ -747,6 +767,15 @@ studyTimerId = null;
 }
 
 updateStudyTimer();
+ 
+function resetStudyTimer(){
+
+ stopStudyTimer();
+
+ studySeconds = 0;
+
+ updateStudyTimer();
+}
  
 </script>
 
