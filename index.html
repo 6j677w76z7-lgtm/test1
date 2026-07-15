@@ -336,7 +336,39 @@ function render(){
 
  let totalDone=0;
  let totalItems=0;
+ 
+const activeCourses =
+courses.filter(course=>{
 
+ const done =
+ count(course.lesson)+
+ count(course.quiz)+
+ count(course.final);
+
+ const total =
+ course.lesson.length+
+ course.quiz.length+
+ course.final.length;
+
+ return done < total;
+});
+
+const completedCourses =
+courses.filter(course=>{
+
+ const done =
+ count(course.lesson)+
+ count(course.quiz)+
+ count(course.final);
+
+ const total =
+ course.lesson.length+
+ course.quiz.length+
+ course.final.length;
+
+ return done >= total;
+});
+ 
  courses.forEach((course,c)=>{
 
    const done=
