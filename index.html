@@ -719,7 +719,10 @@ function resetTimer(){
  
 
  
-let studySeconds = 0;
+let studySeconds =
+Number(
+  localStorage.getItem("studySeconds")
+) || 0;
 
 let studyTimerId = null;
  
@@ -741,7 +744,7 @@ document.getElementById("studyTimer")
 .innerText =
 `${h}:${m}:${s}`;
 }
- 
+
 function startStudyTimer(){
   
 if(studyTimerId) return;
@@ -749,7 +752,12 @@ if(studyTimerId) return;
 studyTimerId = setInterval(()=>{
   
 studySeconds++;
-  
+
+localStorage.setItem(
+  "studySeconds",
+  studySeconds
+);
+
 updateStudyTimer();
   
 },1000);
@@ -758,9 +766,9 @@ updateStudyTimer();
 
 function stopStudyTimer(){
   
-clearInterval(studyTimerId);
+ clearInterval(studyTimerId);
   
-studyTimerId = null;
+ studyTimerId = null;
     
 }
 
@@ -773,6 +781,12 @@ function resetStudyTimer(){
  studySeconds = 0;
 
  updateStudyTimer();
+
+ localStorage.setItem(
+  "studySeconds",
+  0
+);
+ 
 }
  
 updateStudyTimer();
