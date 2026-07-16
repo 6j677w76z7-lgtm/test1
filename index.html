@@ -220,6 +220,17 @@
 .countdown-area .progress{
   width:100%;
 } 
+
+.timer-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+#timer{
+  font-size:36px;
+  font-weight:bold;
+}
  </style>
 </head>
 
@@ -284,34 +295,46 @@
   <div class="card study-card">
   
    <h2>Total Study</h2>
-  
-   <div id="timer"
-    style="font-size:36px;font-weight:bold;">
-    00:00:00
+
+   <div class="timer-row">
+    <div id="timer"
+     style="font-size:36px;font-weight:bold;">
+     00:00:00
+    </div>
+   
+    <button
+     id="timerButton"
+     onclick="toggleTimer()"
+     class="icon-btn">
+    ▷
+    </button>
+    
+    <button
+    onclick="resetTimer()"
+    class="icon-btn">
+    ↻
+    </button>
    </div>
   
-   <button
-    id="timerButton"
-    onclick="toggleTimer()"
-    class="icon-btn">
-   ▷
-   </button>
-   
-   <button
-   onclick="resetTimer()"
-   class="icon-btn">
-   ↻
-   </button>
-  
   </div>
+  
   <div class="card study-card">
-    <h2>Self Study</h2>
+   <div style="
+    display:flex;
+    align-items:center;
+    gap:12px;
+    ">
+    
+     <h2>Self Study</h2>
+ 
+     <input
+     id="studyTitle"
+     placeholder="青チャート">
 
+   </div>
+   
+   <div class="timer-row">
     <div id="studyTimer">00:00:00</div>
-
-    <input
-      id="studyTitle"
-      placeholder="青チャート">
 
     <button
     id="studyButton"
@@ -331,6 +354,7 @@
      class="icon-btn">
      ＋
     </button>
+   </div>
    
   </div>
   
