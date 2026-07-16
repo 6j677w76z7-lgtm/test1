@@ -266,6 +266,41 @@ new Chart(
  }
 );
 
+
+@media (max-width:768px){
+
+  .top-area{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  h1{
+    font-size:36px;
+  }
+
+  .overall-circle{
+    margin:auto;
+  }
+
+  .countdown-area{
+    width:100%;
+  }
+
+  .study-card{
+    width:100%;
+  }
+
+  .timer-row{
+    flex-wrap:wrap;
+  }
+
+  #timer,
+  #studyTimer{
+    font-size:28px;
+  }
+
+}
+
  </style>
 </head>
 
@@ -566,9 +601,16 @@ function stopDrag(){
 
  
  
-function save(){
- localStorage.setItem("courses",
- JSON.stringify(courses));
+async function save(){
+
+ localStorage.setItem("courses",JSON.stringify(courses)
+ );
+
+ await setDoc(
+  doc(db,"courses","main"),
+  {courses:courses}
+ );
+
 }
 
 function toggle(type,course,index){
@@ -1374,7 +1416,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebas
 import {
   getFirestore,
   doc,
-  setDoc
+  setDoc,
+  getDoc
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -1390,12 +1433,28 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-await setDoc(
-  doc(db, "courses", "main"),
-  {
-    courses: courses
-  }
-);
+await loadCourses();
+
+async function loadCourses(){
+
+ const snap = await getDoc(doc(db, "courses", "main"));
+
+ if(snap.exists()){
+
+  courses.length = 0;
+  courses.push(...snap.data().courses);
+
+ }else{
+
+  courses.push(
+   ...(JSON.parse(localStorage.getItem("courses")
+    ) || [])
+  );
+
+ }
+
+ render();
+}
 
 console.log("Firestore接続成功");
 
