@@ -352,6 +352,36 @@ const studyHistory =
 JSON.parse(
  localStorage.getItem("studyHistory")
 ) || [];
+
+
+
+let isDragging = false;
+ 
+ function startDrag(){
+   isDragging = true;
+ }
+ 
+ function stopDrag(){
+   isDragging = false;
+ }
+
+ document.addEventListener("mouseup", stopDrag);
+ document.addEventListener("touchend", stopDrag);
+
+ function dragFill(type, course, index){
+
+  if(!isDragging) return;
+
+  if(course[type][index]) return;
+
+  course[type][index] = true;
+
+  save();
+
+  render();
+}
+
+
  
 function save(){
  localStorage.setItem("courses",
@@ -545,13 +575,13 @@ style="width:${percent}%"></div>
 <div class="grid"
 style="grid-template-columns:repeat(${course.lesson.length},24px);">
 ${course.lesson.map((x,i)=>
-`<div style="
-width:24px;
-text-align:center;
-font-size:11px;
-">
-${i+1}
-</div>`
+ `<div style="
+ width:24px;
+ text-align:center;
+ font-size:11px;
+ ">
+ ${i+1}
+ </div>`
 ).join("")}
 </div>
 
@@ -567,8 +597,29 @@ ${i+1}
 style="grid-template-columns:repeat(${course.lesson.length},24px);">
 
 ${course.lesson.map((x,i)=>
-`<div class="box lesson ${x?'done':''}"
-onclick="toggle('lesson',courses[${originalIndex}],${i})"></div>`
+<div
+ class="box lesson ${x?'done':''}"
+
+ onclick="toggle('lesson',courses[${originalIndex}],${i})"
+
+ onmousedown="startDrag()"
+
+ onmouseover="
+ dragFill(
+  'lesson',
+  courses[${originalIndex}],
+  ${i}
+ )"
+
+ ontouchstart="
+ startDrag();
+ toggle(
+  'lesson',
+  courses[${originalIndex}],
+  ${i}
+ )"
+>
+</div>
 ).join("")}
 
 </div>
@@ -704,6 +755,9 @@ ${
 }
 
 
+
+
+ 
  
 function saveStudy(){
 
@@ -736,10 +790,6 @@ function saveStudy(){
  resetStudyTimer();
 
 }
-
- 
-
-
  
 let seconds =
 Number(
@@ -856,6 +906,7 @@ function updateTimerButton(){
  timerRunning ? "Ⅱ" : "▷";
 
 }
+
 
 
  
