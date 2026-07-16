@@ -567,152 +567,143 @@ border-left:8px solid ${subjectColors[course.subject] || '#999'};
 ${isComplete ? 'background:#ecfdf5;' : ''}
 ">
 
-<h2 style="display:flex;justify-content:space-between;align-items:center;">
- <span>
-  ${isComplete ? '🌸 ' : ''}
-  ${course.subject}｜${course.name}
- </span>
- <button onclick="deleteCourse(${originalIndex})"
-  style="background:#ef4444;padding:6px 10px;">
-  🗑️
- </button>
-</h2>
+  <h2 style="display:flex;justify-content:space-between;align-items:center;">
+   <span>
+    ${isComplete ? '🌸 ' : ''}
+    ${course.subject}｜${course.name}
+   </span>
+   <button onclick="deleteCourse(${originalIndex})"
+    style="background:#ef4444;padding:6px 10px;">
+    🗑️
+   </button>
+  </h2>
 
-<div>
-進捗 ${percent}%
-</div>
+  <div>
+  進捗 ${percent}%
+  </div>
 
-<div class="progress">
-<div class="fill"
-style="width:${percent}%"></div>
-</div>
+  <div class="progress">
+  <div class="fill"
+  style="width:${percent}%"></div>
 
-<div class="grid"
-style="grid-template-columns:repeat(${course.lesson.length},24px);">
-${course.lesson.map((x,i)=>
- `<div style="
- width:24px;
- text-align:center;
- font-size:11px;
- ">
- ${i+1}
- </div>`
-).join("")}
-</div>
-
-</div>
+ <div class="grid"
+ style="grid-template-columns:repeat(${course.lesson.length},24px);">
+   ${course.lesson.map((x,i)=>
+   `<div style="
+   width:24px;
+   text-align:center;
+   font-size:11px;
+   ">
+   ${i+1}
+   </div>`
+   ).join("")}
+ </div>
+ 
  <div style="display:flex;align-items:center;margin-bottom:4px;">
  <div style="width:50px;">
- 授業
-</div>
-
-<div class="grid"
-style="grid-template-columns:repeat(${course.lesson.length},24px);">
-
-${course.lesson.map((x,i)=>
- `
- <div
-  class="box lesson ${x?'done':''}"
- 
-  onclick="toggle('lesson',courses[${originalIndex}],${i})"
- 
-  onmousedown="startDrag()"
- 
-  onmouseover="
-  dragFill(
-   'lesson',
-   courses[${originalIndex}],
-   ${i}
-  )"
- 
-  ontouchstart="
-  startDrag();
-  toggle(
-   'lesson',
-   courses[${originalIndex}],
-   ${i}
-  )"
-
-   ontouchmove="
-  dragFill(
-   'lesson',
-   courses[${originalIndex}],
-   ${i}
-  )"
- >
+  授業
  </div>
- `
-).join("")}
+
+ <div class="grid"
+ style="grid-template-columns:repeat(${course.lesson.length},24px);">
+ 
+   ${course.lesson.map((x,i)=>
+   `
+   <div
+    class="box lesson ${x?'done':''}"
+  
+    onclick="toggle('lesson',courses[${originalIndex}],${i})"
+   
+    onmousedown="startDrag()"
+   
+    onmouseover="
+    dragFill(
+     'lesson',
+     courses[${originalIndex}],
+     ${i}
+    )"
+   
+    ontouchstart="
+    startDrag();
+    toggle(
+     'lesson',
+     courses[${originalIndex}],
+     ${i}
+    )"
+  
+     ontouchmove="
+    dragFill(
+     'lesson',
+     courses[${originalIndex}],
+     ${i}
+    )"
+   >
+   </div>
+  `
+ ).join("")}
 
 </div>
 
-</div>
- <div style="display:flex;align-items:center;">
- <div style="width:50px;">
+<div style="display:flex;align-items:center;">
+<div style="width:50px;">
  テスト
 </div>
 
 <div class="grid"
 style="grid-template-columns:repeat(${course.quiz.length},24px);">
 
-${course.quiz.map((x,i)=>
-`<div class="box quiz ${x?'done':''}"
-onclick="toggle('quiz',courses[${originalIndex}],${i})"></div>`
-).join("")}
+ ${course.quiz.map((x,i)=>
+ `<div class="box quiz ${x?'done':''}"
+ onclick="toggle('quiz',courses[${originalIndex}],${i})"></div>`
+ ).join("")}
 
 </div>
-
-</div>
-
-</div>
-
 
 <div class="row">
  <b>終了判定 ${count(course.final)}/${course.final.length}</b>
 
-<div class="grid">
+ <div class="grid">
 
-${course.quiz.map((x,i)=>
-`
-<div
- class="box quiz ${x?'done':''}"
+  ${course.quiz.map((x,i)=>
+  `
+  <div
+   class="box quiz ${x?'done':''}"
+  
+   onclick="toggle(
+    'quiz',
+    courses[${originalIndex}],
+    ${i}
+   )"
+  
+   onmousedown="startDrag()"
+  
+   onmouseover="
+    dragFill(
+     'quiz',
+     courses[${originalIndex}],
+     ${i}
+    )"
+  
+   ontouchstart="
+    startDrag();
+    toggle(
+     'quiz',
+     courses[${originalIndex}],
+     ${i}
+    )"
+  
+   ontouchmove="
+    dragFill(
+     'quiz',
+     courses[${originalIndex}],
+     ${i}
+    )"
+  >
+  </div>
+  `
+  ).join("")}
 
- onclick="toggle(
-  'quiz',
-  courses[${originalIndex}],
-  ${i}
- )"
-
- onmousedown="startDrag()"
-
- onmouseover="
-  dragFill(
-   'quiz',
-   courses[${originalIndex}],
-   ${i}
-  )"
-
- ontouchstart="
-  startDrag();
-  toggle(
-   'quiz',
-   courses[${originalIndex}],
-   ${i}
-  )"
-
- ontouchmove="
-  dragFill(
-   'quiz',
-   courses[${originalIndex}],
-   ${i}
-  )"
->
-</div>
-`
-).join("")}
-
-
-</div>
+ </div>
 </div>
 
 </div>
