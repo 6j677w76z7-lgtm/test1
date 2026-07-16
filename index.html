@@ -603,16 +603,24 @@ function stopDrag(){
  
 async function save(){
 
- localStorage.setItem("courses",JSON.stringify(courses)
+ localStorage.setItem(
+  "courses",
+  JSON.stringify(window.courses)
  );
 
  await setDoc(
-  doc(db,"courses","main"),
-  {courses:courses}
+  window.doc(window.db,"courses","main"),
+  {
+   courses:window.courses
+  }
  );
 
 }
 
+
+
+
+ 
 function toggle(type,course,index){
 
  const before = course[type][index];
