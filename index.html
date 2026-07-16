@@ -1436,19 +1436,19 @@ async function loadCourses(){
 
  if(snap.exists()){
 
-  courses.length = 0;
-  courses.push(...snap.data().courses);
+  window.courses.length = 0;
+  window.courses.push(...snap.data().courses);
 
  }else{
 
-  courses.push(
+  window.courses.push(
    ...(JSON.parse(localStorage.getItem("courses")
     ) || [])
   );
 
  }
 
- render();
+ window.render();
 }
 
 console.log("Firestore接続成功");
