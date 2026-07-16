@@ -509,34 +509,36 @@ const studyHistory =
     JSON.stringify(studyHistory)
   );
 
-  localStorage.setItem(
-    "todaySeconds",
-    "0"
-  );
+ const yesterdaySeconds =
+   Number(
+    localStorage.getItem(
+      "todaySeconds"
+    )
+   ) || 0;
 
 totalHistory.unshift({
-
  date:lastDate,
-
- seconds:Number(
-  localStorage.getItem(
-   "todaySeconds"
-  )
- ) || 0
-
+ seconds:yesterdaySeconds
 });
 
+ localStorage.setItem(
+   "todaySeconds",
+   "0"
+ );
+ 
 localStorage.setItem(
  "totalHistory",
  JSON.stringify(totalHistory)
 );
 
-}
-
 localStorage.setItem(
   "lastDate",
   today
 );
+
+}
+
+ 
 
 
 
@@ -1419,6 +1421,10 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+window.db = db;
+window.doc = doc;
+window.setDoc = setDoc;
 
 await loadCourses();
 
