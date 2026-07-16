@@ -603,20 +603,22 @@ function stopDrag(){
  
 async function save(){
 
- localStorage.setItem(
-  "courses",
-  JSON.stringify(window.courses)
- );
+  localStorage.setItem(
+    "courses",
+    JSON.stringify(window.courses)
+  );
 
- await setDoc(
-  window.doc(window.db,"courses","main"),
-  {
-   courses:window.courses
+  if(!window.db || !window.doc || !window.setDoc){
+    return;
   }
- );
 
+  await window.setDoc(
+    window.doc(window.db,"courses","main"),
+    {
+      courses:window.courses
+    }
+  );
 }
-
 
 
 
