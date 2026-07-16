@@ -202,7 +202,21 @@
  font-size:28px;
  font-weight:700;
 }
+  
+.countdown-area{
+  width:380px;
+}
+  
+.days-text{
+  font-size:18px;
+  font-weight:700;
+  color:#2563eb;
+  margin-bottom:10px;
+}
 
+.countdown-area .progress{
+  width:100%;
+} 
  </style>
 </head>
 
@@ -244,17 +258,21 @@
   
   </div>
 
-   <div style="
-   font-size:18px;
-   font-weight:bold;
-   color:#2563eb;
-   margin-bottom:10px;">
-   共テまで
-    <span id="daysBig"></span>
+  <div calss="countdown-area">
+   <div class="days-text">
+    <div style="
+    font-size:18px;
+    font-weight:bold;
+    color:#2563eb;
+    margin-bottom:10px;">
+    共テまで
+     <span id="daysBig"></span>
+    </div>
    </div>
-
-   <div class="progress" style="margin-top:8px;">
-    <div id="dayBar" class="fill"></div>
+   
+    <div class="progress" style="margin-top:8px;">
+     <div id="dayBar" class="fill"></div>
+   </div>
   </div>
   
  </div>
