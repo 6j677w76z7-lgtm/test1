@@ -588,11 +588,10 @@ style="width:${percent}%"></div>
 </div>
 
 <div class="row">
-<b>授業・確認テスト</b>
-
-<div style="display:flex;align-items:center;">
-
-<div style="width:50px;"></div>
+ <b>授業・確認テスト</b>
+ <div style="display:flex;align-items:center;">
+ <div style="width:24px;">
+</div>
 
 <div class="grid"
 style="grid-template-columns:repeat(${course.lesson.length},24px);">
@@ -608,11 +607,9 @@ ${course.lesson.map((x,i)=>
 </div>
 
 </div>
-
-<div style="display:flex;align-items:center;margin-bottom:4px;">
-
-<div style="width:50px;font-weight:bold;">
-授業
+ <div style="display:flex;align-items:center;margin-bottom:4px;">
+ <div style="width:24px;font-weight:bold;">
+ 授業
 </div>
 
 <div class="grid"
@@ -656,11 +653,9 @@ ${course.lesson.map((x,i)=>
 </div>
 
 </div>
-
-<div style="display:flex;align-items:center;">
-
-<div style="width:50px;font-weight:bold;">
-確認
+ <div style="display:flex;align-items:center;">
+ <div style="width:24px;font-weight:bold;">
+ 確認
 </div>
 
 <div class="grid"
@@ -679,7 +674,7 @@ onclick="toggle('quiz',courses[${originalIndex}],${i})"></div>`
 
 
 <div class="row">
-<b>終了判定 ${count(course.final)}/${course.final.length}</b>
+ <b>終了判定 ${count(course.final)}/${course.final.length}</b>
 
 <div class="grid">
 
