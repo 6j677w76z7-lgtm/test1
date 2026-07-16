@@ -587,12 +587,6 @@ ${isComplete ? 'background:#ecfdf5;' : ''}
 style="width:${percent}%"></div>
 </div>
 
-<div class="row">
- <b>授業・確認テスト</b>
- <div style="display:flex;align-items:center;">
- <div style="width:24px;">
-</div>
-
 <div class="grid"
 style="grid-template-columns:repeat(${course.lesson.length},24px);">
 ${course.lesson.map((x,i)=>
@@ -608,7 +602,7 @@ ${course.lesson.map((x,i)=>
 
 </div>
  <div style="display:flex;align-items:center;margin-bottom:4px;">
- <div style="width:24px;font-weight:bold;">
+ <div style="width:50px;">
  授業
 </div>
 
@@ -654,8 +648,8 @@ ${course.lesson.map((x,i)=>
 
 </div>
  <div style="display:flex;align-items:center;">
- <div style="width:24px;font-weight:bold;">
- 確認
+ <div style="width:50px;">
+ テスト
 </div>
 
 <div class="grid"
