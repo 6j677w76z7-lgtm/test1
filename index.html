@@ -436,6 +436,11 @@ const studyHistory =
     ) || 0
   });
 
+const totalHistory =
+JSON.parse(
+ localStorage.getItem("totalHistory")
+) || [];
+ 
   localStorage.setItem(
     "studyHistory",
     JSON.stringify(studyHistory)
@@ -447,6 +452,28 @@ const studyHistory =
   );
 }
 
+const totalHistory =
+ JSON.parse(
+  localStorage.getItem("totalHistory")
+ ) || [];
+
+totalHistory.unshift({
+
+ date:lastDate,
+
+ seconds:Number(
+  localStorage.getItem(
+   "todaySeconds"
+  )
+ ) || 0
+
+});
+
+localStorage.setItem(
+ "totalHistory",
+ JSON.stringify(totalHistory)
+);
+ 
 localStorage.setItem(
   "lastDate",
   today
@@ -846,9 +873,21 @@ document
 .style.width=
 remainPercent+"%";
 
+const totalItemsForHistory =
+ totalHistory.map(item=>({
+
+  date:item.date,
+
+  category:"total",
+
+  seconds:item.seconds
+
+ }));
+
 const merged = [
-  ...history,
-  ...studyHistory
+ ...history,
+ ...studyHistory,
+ ...totalItemsForHistory
 ];
 
 const grouped = {};
@@ -885,6 +924,14 @@ ${
  `⏱ ${item.title}
  <br>
  ${item.minutes}分`
+ 
+ : item.category === "total"
+ ?
+ `📊 Total Study
+ <br>
+ ${Math.floor(item.seconds/3600)}時間
+ ${Math.floor(item.seconds%3600/60)}分`
+ 
  :
  `📚 ${item.course}
  <br>
