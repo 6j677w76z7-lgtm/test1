@@ -467,8 +467,10 @@ function toggleHistory(){
  
 const examDate=new Date("2027-01-16");
 
-const courses=
+window.courses=
 JSON.parse(localStorage.getItem("courses"))||[];
+
+const courses = window.courses;
 
 const today =
 new Date().toLocaleDateString("ja-JP");
@@ -1395,7 +1397,8 @@ document.getElementById("summary").innerHTML =
  
 render();
 
-
+window.render = render;
+ 
  
 </script>
 
