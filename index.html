@@ -186,7 +186,23 @@
  width:60px;
  white-space:nowrap;
 }
-  
+
+.overall-circle{
+ position:relative;
+ width:140px;
+ height:140px;
+ margin:auto;
+}
+
+#overallPercent{
+ position:absolute;
+ top:50%;
+ left:50%;
+ transform:translate(-50%,-50%);
+ font-size:28px;
+ font-weight:700;
+}
+
  </style>
 </head>
 
@@ -197,11 +213,41 @@
 
   <h1>StudyBoard</h1>
  
-   <div id="overallText"></div>
- 
-   <div class="progress">
-    <div id="overallBar" class="fill"></div>
+   <div class="progress"></div>
+   
+  </div>
+
+   <div class="overall-circle">
+  
+   <svg width="140" height="140">
+  
+    <circle
+     cx="70"
+     cy="70"
+     r="55"
+     stroke="#e5e7eb"
+     stroke-width="10"
+     fill="none"
+    />
+  
+    <circle
+     id="overallCircle"
+     cx="70"
+     cy="70"
+     r="55"
+     stroke="#22c55e"
+     stroke-width="10"
+     fill="none"
+     stroke-linecap="round"
+     transform="rotate(-90 70 70)"
+    />
+  
+   </svg>
+  
+   <div id="overallPercent">
+    0%
    </div>
+  
   </div>
 
   <div class="card countdown-card">
@@ -723,6 +769,27 @@ style="grid-template-columns:repeat(${course.quiz.length},24px);">
  ?0
  :Math.round(totalDone/totalItems*100);
 
+ const circumference =
+ 2 * Math.PI * radius;
+
+const offset =
+ circumference * (1 - overall / 100);
+
+document.getElementById(
+ "overallCircle"
+).style.strokeDasharray =
+ circumference;
+
+document.getElementById(
+ "overallCircle"
+).style.strokeDashoffset =
+ offset;
+
+document.getElementById(
+ "overallPercent"
+).innerText =
+ `${overall}%`;
+ 
  document.getElementById("overallText")
  .innerHTML=
  `${overall}% (${totalDone}/${totalItems})`;
@@ -731,7 +798,7 @@ style="grid-template-columns:repeat(${course.quiz.length},24px);">
  .style.width=
  overall+"%";
 
- const days=
+const days=
 Math.ceil(
  (examDate-new Date())/86400000);
 
