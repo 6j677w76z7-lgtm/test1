@@ -200,7 +200,7 @@ small{
  <div class="top-area">
   <div class="card study-card">
   
-   <h2>Totar Study</h2>
+   <h2>Total Study</h2>
   
    <div id="timer"
     style="font-size:36px;font-weight:bold;">
@@ -368,20 +368,23 @@ let isDragging = false;
  document.addEventListener("mouseup", stopDrag);
  document.addEventListener("touchend", stopDrag);
 
- function dragFill(type, course, index){
+function dragFill(type, course, index){
 
   if(!isDragging) return;
 
-  if(course[type][index]) return;
-
   course[type][index] = true;
+}
+
+function stopDrag(){
+
+  isDragging = false;
 
   save();
 
   render();
 }
 
-
+ 
  
 function save(){
  localStorage.setItem("courses",
@@ -597,29 +600,38 @@ ${course.lesson.map((x,i)=>
 style="grid-template-columns:repeat(${course.lesson.length},24px);">
 
 ${course.lesson.map((x,i)=>
-<div
- class="box lesson ${x?'done':''}"
+ `
+ <div
+  class="box lesson ${x?'done':''}"
+ 
+  onclick="toggle('lesson',courses[${originalIndex}],${i})"
+ 
+  onmousedown="startDrag()"
+ 
+  onmouseover="
+  dragFill(
+   'lesson',
+   courses[${originalIndex}],
+   ${i}
+  )"
+ 
+  ontouchstart="
+  startDrag();
+  toggle(
+   'lesson',
+   courses[${originalIndex}],
+   ${i}
+  )"
 
- onclick="toggle('lesson',courses[${originalIndex}],${i})"
-
- onmousedown="startDrag()"
-
- onmouseover="
- dragFill(
-  'lesson',
-  courses[${originalIndex}],
-  ${i}
- )"
-
- ontouchstart="
- startDrag();
- toggle(
-  'lesson',
-  courses[${originalIndex}],
-  ${i}
- )"
->
-</div>
+   ontouchmove="
+  dragFill(
+   'lesson',
+   courses[${originalIndex}],
+   ${i}
+  )"
+ >
+ </div>
+ `
 ).join("")}
 
 </div>
