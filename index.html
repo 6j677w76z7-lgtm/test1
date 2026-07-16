@@ -272,7 +272,7 @@
   
   </div>
 
-  <div calss="countdown-area">
+  <div class="countdown-area">
    <div class="days-text">
     <div style="
     font-size:18px;
@@ -459,11 +459,6 @@ JSON.parse(
     "0"
   );
 
-const totalHistory =
- JSON.parse(
-  localStorage.getItem("totalHistory")
- ) || [];
-
 totalHistory.unshift({
 
  date:lastDate,
@@ -495,48 +490,6 @@ JSON.parse(
 ) || [];
 
 }
-
- 
-
-
-const totalSecondsAll =
- totalHistory.reduce(
-  (sum,item)=>sum+item.seconds,
-  0
- );
-
-const totalHours =
- Math.floor(totalSecondsAll/3600);
-
-const totalMinutes =
- Math.floor(
-  totalSecondsAll%3600/60
- );
-
-const todayHours =
- Math.floor(seconds/3600);
-
-const todayMinutes =
- Math.floor(
-  seconds%3600/60
- );
-
-const weekSeconds =
- totalHistory
-  .slice(0,7)
-  .reduce(
-   (sum,item)=>sum+item.seconds,
-   0
-  );
- 
-const weekHours =
- Math.floor(weekSeconds/3600);
-
-const weekMinutes =
- Math.floor(
-  weekSeconds%3600/60
- );
-
  
  
 
@@ -831,10 +784,10 @@ style="grid-template-columns:repeat(${course.quiz.length},24px);">
   ${course.final.map((x,i)=>
   `
   <div
-   class="box quiz ${x?'done':''}"
+   class="box final ${x?'done':''}"
   
    onclick="toggle(
-    'quiz',
+    'final',
     courses[${originalIndex}],
     ${i}
    )"
@@ -843,7 +796,7 @@ style="grid-template-columns:repeat(${course.quiz.length},24px);">
   
    onmouseover="
     dragFill(
-     'quiz',
+     'final',
      courses[${originalIndex}],
      ${i}
     )"
@@ -851,14 +804,14 @@ style="grid-template-columns:repeat(${course.quiz.length},24px);">
    ontouchstart="
     startDrag();
     toggle(
-     'quiz',
+     'final',
      courses[${originalIndex}],
      ${i}
     )"
   
    ontouchmove="
     dragFill(
-     'quiz',
+     'final',
      courses[${originalIndex}],
      ${i}
     )"
@@ -1315,6 +1268,44 @@ updateStudyTimer();
 
 updateTimerButton();
 updateStudyButton();
+
+const totalSecondsAll =
+ totalHistory.reduce(
+  (sum,item)=>sum+item.seconds,
+  0
+ );
+
+const totalHours =
+ Math.floor(totalSecondsAll/3600);
+
+const totalMinutes =
+ Math.floor(
+  totalSecondsAll%3600/60
+ );
+
+const weekSeconds =
+ totalHistory
+  .slice(0,7)
+  .reduce(
+   (sum,item)=>sum+item.seconds,
+   0
+  );
+
+const weekHours =
+ Math.floor(weekSeconds/3600);
+
+const weekMinutes =
+ Math.floor(
+  weekSeconds%3600/60
+ );
+
+const todayHours =
+ Math.floor(seconds/3600);
+
+const todayMinutes =
+ Math.floor(
+  seconds%3600/60
+ );
 
 document.getElementById("summary").innerHTML =
 
