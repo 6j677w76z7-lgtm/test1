@@ -607,9 +607,13 @@ ${isComplete ? 'background:#ecfdf5;' : ''}
  </div>
  </div>
 
- <div class="grid"
- style="grid-template-columns:repeat(${course.lesson.length},24px);">
  
+<div style="display:flex;align-items:center;">
+
+<div style="width:50px;"></div>
+
+<div class="grid"
+ style="grid-template-columns:repeat(${course.lesson.length},24px);">
    ${course.lesson.map((x,i)=>
    `
    <div
@@ -655,6 +659,10 @@ ${isComplete ? 'background:#ecfdf5;' : ''}
 </div>
 </div>
 
+<div style="display:flex;align-items:center;">
+
+<div style="width:50px;"></div>
+
 <div class="grid"
 style="grid-template-columns:repeat(${course.quiz.length},24px);">
 
@@ -667,10 +675,8 @@ style="grid-template-columns:repeat(${course.quiz.length},24px);">
 </div>
 
 <div class="row">
- <b>終了判定 ${count(course.final)}/${course.final.length}</b>
-
+ 終了判定 ${count(course.final)}/${course.final.length}
  <div class="grid">
-
   ${course.final.map((x,i)=>
   `
   <div
