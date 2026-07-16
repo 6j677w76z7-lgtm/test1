@@ -586,7 +586,9 @@ ${isComplete ? 'background:#ecfdf5;' : ''}
   <div class="fill"
   style="width:${percent}%"></div>
   </div>
-  
+
+ <div style="display:flex;align-items:center;">
+ <div style="width:50px;"></div>
  <div class="grid"
  style="grid-template-columns:repeat(${course.lesson.length},24px);">
    ${course.lesson.map((x,i)=>
@@ -599,6 +601,7 @@ ${isComplete ? 'background:#ecfdf5;' : ''}
    </div>`
    ).join("")}
  </div>
+ </div>
  
  <div style="display:flex;align-items:center;margin-bottom:4px;">
  <div style="width:50px;">
@@ -606,11 +609,6 @@ ${isComplete ? 'background:#ecfdf5;' : ''}
   授業
  </div>
  </div>
-
- 
-<div style="display:flex;align-items:center;">
-
-<div style="width:50px;"></div>
 
 <div class="grid"
  style="grid-template-columns:repeat(${course.lesson.length},24px);">
@@ -651,7 +649,6 @@ ${isComplete ? 'background:#ecfdf5;' : ''}
 
 </div>
 </div>
-</div>
 
 <div style="display:flex;align-items:center;">
 <div style="width:50px;">
@@ -659,10 +656,6 @@ ${isComplete ? 'background:#ecfdf5;' : ''}
  テスト
 </div>
 </div>
-
-<div style="display:flex;align-items:center;">
-
-<div style="width:50px;"></div>
 
 <div class="grid"
 style="grid-template-columns:repeat(${course.quiz.length},24px);">
@@ -719,7 +712,6 @@ style="grid-template-columns:repeat(${course.quiz.length},24px);">
   ).join("")}
 
  </div>
-</div>
 </div>
 </div>
 </div>
