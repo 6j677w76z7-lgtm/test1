@@ -430,6 +430,20 @@ new Date().toLocaleDateString("ja-JP");
 const lastDate =
 localStorage.getItem("lastDate");
 
+
+const totalHistory =
+JSON.parse(
+ localStorage.getItem("totalHistory")
+) || [];
+ 
+const history =
+JSON.parse(localStorage.getItem("history")) || [];
+ 
+const studyHistory =
+JSON.parse(
+ localStorage.getItem("studyHistory")
+) || [];
+
 if(lastDate && lastDate !== today){
 
 const studyHistory =
@@ -443,11 +457,6 @@ const studyHistory =
       localStorage.getItem("todaySeconds")
     ) || 0
   });
-
-const totalHistory =
-JSON.parse(
- localStorage.getItem("totalHistory")
-) || [];
  
   localStorage.setItem(
     "studyHistory",
@@ -475,21 +484,15 @@ localStorage.setItem(
  "totalHistory",
  JSON.stringify(totalHistory)
 );
- 
+
+}
+
 localStorage.setItem(
   "lastDate",
   today
 );
 
-}
- 
-const history =
-JSON.parse(localStorage.getItem("history")) || [];
- 
-const studyHistory =
-JSON.parse(
- localStorage.getItem("studyHistory")
-) || [];
+
 
  
  
