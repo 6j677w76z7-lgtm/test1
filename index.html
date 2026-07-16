@@ -104,9 +104,11 @@
  }
   
  .top-area{
-  display:flex;
-  gap:16px;
-  margin-bottom:16px;
+   display:flex;
+   align-items:center;
+   justify-content:flex-start;
+   gap:24px;
+   margin-bottom:16px;
  }
  
  .main-card{
@@ -191,7 +193,7 @@
  position:relative;
  width:140px;
  height:140px;
- margin:auto;
+ margin:0;
 }
 
 #overallPercent{
@@ -204,7 +206,8 @@
 }
   
 .countdown-area{
-  width:380px;
+ width:380px;
+ text-align:left;
 }
   
 .days-text{
@@ -644,7 +647,7 @@ ${isComplete ? 'background:#ecfdf5;' : ''}
   </div>
 
  <div style="display:flex;align-items:center;">
- <div style="width:50px;"></div>
+ <div style="width:60px;"></div>
  <div class="grid"
  style="grid-template-columns:repeat(${course.lesson.length},24px);">
    ${course.lesson.map((x,i)=>
