@@ -664,10 +664,45 @@ onclick="toggle('quiz',courses[${originalIndex}],${i})"></div>`
 
 <div class="grid">
 
-${course.final.map((x,i)=>
-`<div class="box final ${x?'done':''}"
-onclick="toggle('final',courses[${originalIndex}],${i})"></div>`
+${course.quiz.map((x,i)=>
+`
+<div
+ class="box quiz ${x?'done':''}"
+
+ onclick="toggle(
+  'quiz',
+  courses[${originalIndex}],
+  ${i}
+ )"
+
+ onmousedown="startDrag()"
+
+ onmouseover="
+  dragFill(
+   'quiz',
+   courses[${originalIndex}],
+   ${i}
+  )"
+
+ ontouchstart="
+  startDrag();
+  toggle(
+   'quiz',
+   courses[${originalIndex}],
+   ${i}
+  )"
+
+ ontouchmove="
+  dragFill(
+   'quiz',
+   courses[${originalIndex}],
+   ${i}
+  )"
+>
+</div>
+`
 ).join("")}
+
 
 </div>
 </div>
