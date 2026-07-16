@@ -580,7 +580,8 @@ ${isComplete ? 'background:#ecfdf5;' : ''}
   <div class="progress">
   <div class="fill"
   style="width:${percent}%"></div>
-
+  </div>
+  
  <div class="grid"
  style="grid-template-columns:repeat(${course.lesson.length},24px);">
    ${course.lesson.map((x,i)=>
@@ -652,6 +653,7 @@ style="grid-template-columns:repeat(${course.quiz.length},24px);">
  onclick="toggle('quiz',courses[${originalIndex}],${i})"></div>`
  ).join("")}
 
+</div>
 </div>
 
 <div class="row">
