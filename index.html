@@ -370,6 +370,14 @@
     ▼ もっと見る
   </div>
 </div>
+
+<div class="card">
+
+ <h2>Study Summary</h2>
+
+ <div id="summary"></div>
+
+</div>
  
 <div id="courses"></div>
   
@@ -488,6 +496,40 @@ JSON.parse(
 ) || [];
 
 
+
+
+const totalSecondsAll =
+ totalHistory.reduce(
+  (sum,item)=>sum+item.seconds,
+  0
+ );
+
+const totalHours =
+ Math.floor(totalSecondsAll/3600);
+
+const totalMinutes =
+ Math.floor(
+  totalSecondsAll%3600/60
+ );
+
+const todayHours =
+ Math.floor(seconds/3600);
+
+const todayMinutes =
+ Math.floor(
+  seconds%3600/60
+ );
+
+const weekSeconds =
+ totalHistory
+  .slice(0,7)
+  .reduce(
+   (sum,item)=>sum+item.seconds,
+   0
+  );
+ 
+
+ 
 
  
 let isDragging = false;
@@ -1266,6 +1308,16 @@ updateStudyTimer();
 updateTimerButton();
 updateStudyButton();
 
+ocument.getElementById(
+ "summary"
+).innerHTML =
+
+`今日 ${todayHours}時間${todayMinutes}分
+ <br><br>
+ 今週 ${weekHours}時間${weekMinutes}分
+ <br><br>
+ 累計 ${totalHours}時間${totalMinutes}分`;
+ 
 render();
 
 
