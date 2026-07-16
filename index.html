@@ -767,6 +767,11 @@ style="grid-template-columns:repeat(${course.quiz.length},24px);">
  ?0
  :Math.round(totalDone/totalItems*100);
 
+ const radius = 55;
+
+ const circumference =
+ 2 * Math.PI * radius;
+ 
  const circumference =
  2 * Math.PI * radius;
 
@@ -787,14 +792,6 @@ document.getElementById(
  "overallPercent"
 ).innerText =
  `${overall}%`;
- 
- document.getElementById("overallText")
- .innerHTML=
- `${overall}% (${totalDone}/${totalItems})`;
-
- document.getElementById("overallBar")
- .style.width=
- overall+"%";
 
 const days=
 Math.ceil(
