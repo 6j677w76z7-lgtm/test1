@@ -458,7 +458,6 @@ JSON.parse(
     "todaySeconds",
     "0"
   );
-}
 
 const totalHistory =
  JSON.parse(
@@ -495,7 +494,9 @@ JSON.parse(
  localStorage.getItem("studyHistory")
 ) || [];
 
+}
 
+ 
 
 
 const totalSecondsAll =
@@ -528,7 +529,15 @@ const weekSeconds =
    0
   );
  
+const weekHours =
+ Math.floor(weekSeconds/3600);
 
+const weekMinutes =
+ Math.floor(
+  weekSeconds%3600/60
+ );
+
+ 
  
 
  
@@ -928,8 +937,7 @@ const totalItemsForHistory =
 
 const merged = [
  ...history,
- ...studyHistory,
- ...totalItemsForHistory
+ ...studyHistory
 ];
 
 const grouped = {};
@@ -1308,9 +1316,7 @@ updateStudyTimer();
 updateTimerButton();
 updateStudyButton();
 
-ocument.getElementById(
- "summary"
-).innerHTML =
+document.getElementById("summary").innerHTML =
 
 `今日 ${todayHours}時間${todayMinutes}分
  <br><br>
