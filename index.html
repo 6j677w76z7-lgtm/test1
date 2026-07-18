@@ -601,27 +601,7 @@ const last7Days =
  
 
  
-let isDragging = false;
- 
- function startDrag(){
-   isDragging = true;
- }
 
-function dragFill(type, course, index){
-
-  if(!isDragging) return;
-
-  course[type][index] = true;
-}
-
-function stopDrag(){
-
-  isDragging = false;
-
-  save();
-
-  render();
-}
 
 
  
