@@ -290,6 +290,10 @@
   #studyTimer{
     font-size:28px;
   }
+ 
+ .lesson-number{
+ display:none;
+}
 
 }
 
@@ -824,13 +828,7 @@ ${isComplete ? 'background:#ecfdf5;' : ''}
  <div class="grid"
  style="grid-template-columns:repeat(${course.lesson.length},var(--cell-size));">
    ${course.lesson.map((x,i)=>
-   `<div style="
-   width:24px;
-   text-align:center;
-   font-size:11px;
-   ">
-   ${i+1}
-   </div>`
+   <div class="lesson-number">
    ).join("")}
  </div>
  </div>
