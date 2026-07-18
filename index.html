@@ -538,38 +538,6 @@ localStorage.setItem(
 }
 
  
-
-
-
- 
-const last7Days =
- totalHistory
-  .slice(0,7)
-  .reverse();
-
- new Chart(
- document.getElementById("studyChart"),
- {
-  type:"bar",
-
-  data:{
-   labels:last7Days.map(x=>x.date),
-
-   datasets:[{
-    data:last7Days.map(x=>Math.round(x.seconds/3600*10)/10),
-    backgroundColor:"#2563eb"
-   }]
-  },
-
-  options:{
-   plugins:{
-    legend:{display:false}
-   }
-  }
- }
-);
-
- 
  
 
  
@@ -1017,7 +985,8 @@ plans
 </label><br>
 `).join("");
 
-
+window.render = render;
+render();
 
  
 function renderCalendar(){
@@ -1089,8 +1058,7 @@ function openDay(day){
  alert(day + "日を開く");
 
 }
-window.render = render;
-render();
+
 renderCalendar();
 
  
