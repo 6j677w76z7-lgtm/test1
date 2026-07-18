@@ -67,8 +67,9 @@
  }
  
  .grid{
-  display:grid;
+  display:flex;
   grid-template-columns:repeat(auto-fill,24px);
+  flex-wrap:nowrap;
   gap:4px;
   overflow-x:auto;
  }
@@ -79,6 +80,7 @@
   border-radius:5px;
   border:1px solid #bbb;
   cursor:pointer;
+  flex-shrink:0;
  }
  
  .lesson.done{
@@ -825,8 +827,7 @@ ${isComplete ? 'background:#ecfdf5;' : ''}
 
  <div style="display:flex;align-items:center;">
  <div style="width:60px;"></div>
- <div class="grid"
- style="grid-template-columns:repeat(${course.lesson.length},var(--cell-size));">
+<div class="grid">
    ${course.lesson.map((x,i)=>
    <div class="lesson-number">
    ).join("")}
@@ -839,8 +840,7 @@ ${isComplete ? 'background:#ecfdf5;' : ''}
  </div>
 
 <div style="overflow-x:auto;">
-<div class="grid"
- style="grid-template-columns:repeat(${course.lesson.length},var(--cell-size));">
+<div class="grid">
    ${course.lesson.map((x,i)=>
    `
    <div
@@ -884,9 +884,7 @@ ${isComplete ? 'background:#ecfdf5;' : ''}
  テスト
 </div>
 
-<div class="grid"
-style="grid-template-columns:repeat(${course.quiz.length},var(--cell-size));">
-
+<div class="grid">
  ${course.quiz.map((x,i)=>
  `<div class="box quiz ${x?'done':''}"
  onclick="toggle('quiz',courses[${originalIndex}],${i})"></div>`
