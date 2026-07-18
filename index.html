@@ -248,6 +248,10 @@
  gap:24px;
 }
 
+.plan-card{
+  flex:1;
+  min-height:180px;
+}
 
 @media (max-width:768px){
    :root{
@@ -355,7 +359,21 @@
   </div>
   
  </div>
- 
+
+ <div class="top-area">
+
+  <div class="card plan-card">
+    <h2>📅 今日</h2>
+    <div id="todayPlans"></div>
+  </div>
+
+  <div class="card plan-card">
+    <h2>📅 明日</h2>
+    <div id="tomorrowPlans"></div>
+  </div>
+
+</div>
+
  <div class="card">
 
   <div id="history" class="collapsed"></div>
@@ -388,6 +406,8 @@
 
 </div>
 
+
+ 
 <script>
  
 function toggleHistory(){
@@ -579,6 +599,8 @@ function toggle(type,course,index){
 
  render();
 }
+
+ 
  
 function addCourse(){
  
@@ -623,14 +645,18 @@ function deleteCourse(index){
 
  render();
 }
+
+
 function count(arr){
  return arr.filter(x=>x).length;
 }
+
 const subjectColors = {
   "数学":"#3b82f6",
   "英語":"#22c55e",
   "物理":"#ef4444",
 };
+ 
 function render(){
 
  let html="";
@@ -796,6 +822,17 @@ ${i+1}
 `;
  });
 
+
+
+
+const plans =
+JSON.parse(
+ localStorage.getItem("plans")
+) || [];
+
+
+
+
  document.getElementById("courses")
  .innerHTML=html;
 
@@ -902,18 +939,51 @@ ${
 `;
 }
 
+
+const todayStr =
+ new Date().toLocaleDateString("ja-JP");
+
+const tomorrowObj =
+ new Date();
+
+tomorrowObj.setDate(
+ tomorrowObj.getDate()+1
+);
+
+const tomorrowStr =
+ tomorrowObj.toLocaleDateString("ja-JP");
+
+document.getElementById(
+ "todayPlans"
+).innerHTML =
+plans
+.filter(p=>p.date===todayStr)
+.map(p=>`
+<label>
+<input
+ type="checkbox"
+ ${p.done?"checked":""}
+>
+ ${p.text}
+</label><br>
+`).join("");
+
+document.getElementById(
+ "tomorrowPlans"
+).innerHTML =
+plans
+.filter(p=>p.date===tomorrowStr)
+.map(p=>`
+<label>
+<input
+ type="checkbox"
+ ${p.done?"checked":""}
+>
+ ${p.text}
+</label><br>
+`).join("");
+ 
 window.render = render;
-
-
- 
-
-
- 
-
-
- 
-
- 
 render();
 
  
