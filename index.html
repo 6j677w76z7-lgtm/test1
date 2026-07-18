@@ -852,27 +852,6 @@ ${i+1}
    `<div
     class="box lesson ${x?'done':''}"
     onclick="toggle('lesson',courses[${originalIndex}],${i})"
-    onmousedown="startDrag()"
-    onmouseover="
-    dragFill(
-     'lesson',
-     courses[${originalIndex}],
-     ${i})"
-   
-    ontouchstart="
-    startDrag();
-    toggle(
-     'lesson',
-     courses[${originalIndex}],
-     ${i}
-    )"
-  
-     ontouchmove="
-    dragFill(
-     'lesson',
-     courses[${originalIndex}],
-     ${i}
-    )"
    >
    </div>`
  ).join("")}
@@ -898,38 +877,12 @@ ${i+1}
  終了判定 ${count(course.final)}/${course.final.length}
  <div class="grid">
   ${course.final.map((x,i)=>
-  `
-  <div
+  `<div
    class="box final ${x?'done':''}"
-  
    onclick="toggle(
     'final',
     courses[${originalIndex}],
-    ${i}
-   )"
-  
-   onmousedown="startDrag()"
-  
-   onmouseover="
-    dragFill(
-     'final',
-     courses[${originalIndex}],
-     ${i}
-    )"
-  
-   ontouchstart="
-    startDrag();
-    toggle(
-     'final',
-     courses[${originalIndex}],
-     ${i}
-    )"
-  
-   ontouchmove="
-    dragFill(
-     'final',
-     courses[${originalIndex}],
-     ${i}
+    ${i} 
     )"
   >
   </div>
