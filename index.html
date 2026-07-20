@@ -495,13 +495,6 @@ const studyHistory =
   JSON.parse(
     localStorage.getItem("studyHistory")
   ) || [];
-
-
-const plans =
-JSON.parse(
- localStorage.getItem("plans")
-) || [];
-
  
   studyHistory.unshift({
     date:lastDate,
@@ -544,7 +537,16 @@ localStorage.setItem(
 
 }
 
- 
+
+
+
+
+
+const plans =
+JSON.parse(
+ localStorage.getItem("plans")
+) || [];
+
  
 
  
@@ -1101,7 +1103,8 @@ function openDay(day){
 renderCalendar();
 
 }
- 
+
+renderCalendar();
  
 </script>
 
