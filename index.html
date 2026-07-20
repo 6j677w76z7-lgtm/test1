@@ -1054,6 +1054,14 @@ function renderCalendar(){
   day++
  ){
 
+ const dayPlans =
+ plans.filter(
+  p=>p.day===day
+ );
+
+ const count =
+ dayPlans.length;
+  
   html += `
   <div
    class="calendar-day"
@@ -1098,10 +1106,9 @@ function openDay(day){
   JSON.stringify(plans)
  );
 
-}
-
 renderCalendar();
 
+}
  
  
 </script>
