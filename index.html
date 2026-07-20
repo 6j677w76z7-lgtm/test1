@@ -997,12 +997,76 @@ window.render = render;
  
 function renderCalendar(){
 
-const calendar =
+cconst calendar =
  document.getElementById("calendar");
 
- calendar.style.border = "5px solid red";
+ const now = new Date();
 
- calendar.innerHTML = "TEST";
+ const year = now.getFullYear();
+ const month = now.getMonth();
+
+ const firstDay =
+  new Date(year,month,1);
+
+ const lastDay =
+  new Date(year,month+1,0);
+
+ let html = `
+ <h3>
+  ${year}年${month+1}月
+ </h3>
+
+ <div class="calendar-grid">
+ `;
+
+ const weekdays =
+ ["日","月","火","水","木","金","土"];
+
+ weekdays.forEach(day=>{
+
+  html += `
+  <div class="calendar-header">
+   ${day}
+  </div>
+  `;
+
+ });
+
+ for(
+  let i=0;
+  i<firstDay.getDay();
+  i++
+ ){
+  html += `<div></div>`;
+ }
+
+ for(
+  let day=1;
+  day<=lastDay.getDate();
+  day++
+ ){
+
+  html += `
+  <div
+   class="calendar-day"
+   onclick="openDay(${day})"
+  >
+
+   <div class="day-number">
+    ${day}
+   </div>
+
+  </div>
+  `;
+
+ }
+
+ html += `
+ </div>
+ `;
+
+ calendar.innerHTML = html;
+
 }
 
 function openDay(day){
