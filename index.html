@@ -1040,6 +1040,14 @@ function renderCalendar(){
   html += `<div></div>`;
  }
 
+ const dayPlans =
+ plans.filter(
+  p=>p.day===day
+ );
+
+ const count =
+ dayPlans.length;
+ 
  for(
   let day=1;
   day<=lastDay.getDate();
@@ -1056,6 +1064,10 @@ function renderCalendar(){
     ${day}
    </div>
 
+   <small>
+    ${count}件
+   </small>
+
   </div>
   `;
 
@@ -1071,7 +1083,20 @@ function renderCalendar(){
 
 function openDay(day){
 
- alert(day + "日を開く");
+ const text =
+ prompt(`${day}日の予定`);
+
+ if(!text)return;
+
+ plans.push({
+  day,
+  text
+ });
+
+ localStorage.setItem(
+  "plans",
+  JSON.stringify(plans)
+ );
 
 }
 
