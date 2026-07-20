@@ -988,71 +988,17 @@ plans
  }
 
 window.render = render;
-render();
+//render();
 
  
 function renderCalendar(){
 
- const calendar =
+const calendar =
  document.getElementById("calendar");
 
- const now = new Date();
+ calendar.style.border = "5px solid red";
 
- const year = now.getFullYear();
- const month = now.getMonth();
-
- const firstDay =
-  new Date(year,month,1);
-
- const lastDay =
-  new Date(year,month+1,0);
-
- let html = "";
-
- const weekdays =
- ["日","月","火","水","木","金","土"];
-
- html += `
- <div class="calendar-grid">
- `;
-
- weekdays.forEach(day=>{
-  html += `
-  <div class="calendar-header">
-   ${day}
-  </div>
-  `;
- });
-
- for(
-  let i=0;
-  i<firstDay.getDay();
-  i++
- ){
-  html += `<div></div>`;
- }
-
- for(
-  let day=1;
-  day<=lastDay.getDate();
-  day++
- ){
-
-  html += `
-  <div
-   class="calendar-day"
-   onclick="openDay(${day})"
-  >
-   <div class="day-number">
-    ${day}
-   </div>
-  </div>
-  `;
- }
-
- html += "</div>";
-
- calendar.innerHTML = html;
+ calendar.innerHTML = "TEST";
 }
 
 function openDay(day){
