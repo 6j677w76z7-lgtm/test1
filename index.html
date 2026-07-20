@@ -496,6 +496,13 @@ const studyHistory =
     localStorage.getItem("studyHistory")
   ) || [];
 
+
+const plans =
+JSON.parse(
+ localStorage.getItem("plans")
+) || [];
+
+ 
   studyHistory.unshift({
     date:lastDate,
     seconds:Number(
@@ -832,13 +839,6 @@ ${i+1}
 
 
 
-const plans =
-JSON.parse(
- localStorage.getItem("plans")
-) || [];
-
-
-
 
  document.getElementById("courses")
  .innerHTML=html;
@@ -1040,14 +1040,6 @@ function renderCalendar(){
   html += `<div></div>`;
  }
 
- const dayPlans =
- plans.filter(
-  p=>p.day===day
- );
-
- const count =
- dayPlans.length;
- 
  for(
   let day=1;
   day<=lastDay.getDate();
