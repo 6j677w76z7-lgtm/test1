@@ -439,7 +439,9 @@
 
   <h2>予定管理</h2>
   <div id="calendar"></div>
-
+ 
+</div>
+ 
 </div>
  
 <script>
@@ -1093,16 +1095,29 @@ function renderCalendar(){
 
 }
 
+
+
+
+
 function openDay(day){
 
- const text =
- prompt(`${day}日の予定`);
+const list =
+ dayPlans
+ .map(p => "・" + p.text)
+ .join("\n");
 
- if(!text)return;
+ const result =
+ prompt(
+ `${day}日の予定\n\n` +
+ (list || "予定なし") +
+ "\n\n新しい予定を追加"
+ );
+
+ if(!result)return;
 
  plans.push({
   day,
-  text
+  text:result
  });
 
  localStorage.setItem(
