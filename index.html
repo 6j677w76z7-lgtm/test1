@@ -1041,7 +1041,8 @@ plans
  type="checkbox"
  ${p.done?"checked":""}
 >
- ${p.text}
+ ${courses[p.courseIndex]?.name}
+第${p.lessonIndex+1}講
 </label><br>
 `).join("");
 
@@ -1056,7 +1057,8 @@ plans
  type="checkbox"
  ${p.done?"checked":""}
 >
- ${p.text}
+ ${courses[p.courseIndex]?.name}
+第${p.lessonIndex+1}講
 </label><br>
 `).join("");
 
@@ -1124,7 +1126,8 @@ function renderCalendar(){
 
  const preview =
  dayPlans.length
- ? `${dayPlans[0].subject} ${dayPlans[0].lesson}`
+ ? `${courses[dayPlans[0].courseIndex].name}
+    第${dayPlans[0].lessonIndex+1}講`
  : "";
   
  const count =
@@ -1182,7 +1185,12 @@ document.getElementById(
   "dayPlanList"
  ).innerHTML =
  dayPlans
- .map((p,i)=>`
+map((p,i)=>{
+
+ const course =
+ courses[p.courseIndex];
+
+ return `
  <div
   style="
   display:flex;
@@ -1192,8 +1200,8 @@ document.getElementById(
  >
 
   <span>
-  ${p.subject}
-  ${p.lesson}
+   ${course.name}
+   第${p.lessonIndex+1}講
   </span>
 
   <button
@@ -1207,8 +1215,9 @@ document.getElementById(
   </button>
 
  </div>
- `)
- .join("");
+ `;
+})
+.join("")
 
 }
 
