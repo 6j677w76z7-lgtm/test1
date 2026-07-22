@@ -492,11 +492,6 @@
   
   <br><br>
 
-  <input
-   id="planLesson"
-   placeholder="内容"
-  >
-
   <br><br>
 
   <button onclick="savePlan()">
@@ -1269,6 +1264,8 @@ courses.map((course,i)=>`
 
 `).join("");
 
+ updateLessonSelect();
+
 }
 
 
@@ -1286,10 +1283,12 @@ function savePlan(){
  const course =
  courses[courseIndex];
 
- const lesson =
- document.getElementById(
-  "planLesson"
- ).value;
+ const lessonIndex =
+ Number(
+  document.getElementById(
+   "planLesson"
+  ).value
+ );
 
  if(!lesson)return;
 
@@ -1334,6 +1333,8 @@ function closePlanForm(){
 
 }
 
+
+
 function updateLessonSelect(){
 
  const courseIndex =
@@ -1343,15 +1344,15 @@ function updateLessonSelect(){
   ).value
  );
 
+ const course =
+ courses[courseIndex];
+
  const lessonIndex =
  Number(
   document.getElementById(
    "planLesson"
   ).value
  );
- 
- const course =
- courses[p.courseIndex];
 
  return `
  ${course.name}
