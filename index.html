@@ -1108,18 +1108,56 @@ const dayPlans =
 
 const list =
  dayPlans
- .map(p => "・" + p.text)
+ .map((p,i) =>
+  `${i+1}. ${p.text}`
+ )
  .join("\n");
 
  const result =
  prompt(
  `${day}日の予定\n\n` +
  (list || "予定なし") +
- "\n\n新しい予定を追加"
+ "\n\n追加する予定を入力\n" +
+ "削除は d1 のように入力"
  );
 
  if(!result)return;
+if(result.startsWith("d")){
 
+ const index =
+ Number(
+  result.slice(1)
+ ) - 1;
+
+ const target =
+  
+ plans.findIndex(
+  p =>
+   p.day === day &&
+   dayPlans.includes(p)
+ );
+
+ if(
+  index >= 0 &&
+  index < dayPlans.length
+ ){
+
+  const targetPlan =
+   dayPlans[index];
+
+  const removeIndex =
+   plans.indexOf(targetPlan);
+
+  plans.splice(
+   removeIndex,
+   1
+  );
+
+renderCalendar();
+}
+ return;
+}
+ 
  plans.push({
   day,
   text:result
@@ -1131,9 +1169,7 @@ const list =
  );
 
 renderCalendar();
-
 }
-
 renderCalendar();
  
 </script>
