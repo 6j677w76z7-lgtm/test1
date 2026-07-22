@@ -1101,6 +1101,11 @@ function renderCalendar(){
 
 function openDay(day){
 
+const dayPlans =
+ plans.filter(
+  p => p.day === day
+ );
+
 const list =
  dayPlans
  .map(p => "・" + p.text)
