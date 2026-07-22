@@ -1053,6 +1053,9 @@ function renderCalendar(){
   p=>p.day===day
  );
 
+ const preview =
+ dayPlans[0]?.text || "";
+
  const count =
  dayPlans.length;
   
@@ -1069,6 +1072,13 @@ function renderCalendar(){
    <small>
     ${count}件
    </small>
+
+<div style="
+ font-size:11px;
+ margin-top:4px;
+">
+ ${preview}
+</div>
 
   </div>
   `;
