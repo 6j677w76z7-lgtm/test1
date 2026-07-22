@@ -483,8 +483,13 @@
 
   <h3>予定追加</h3>
 
-  <select id="planCourse"></select>
+  <select
+ id="planCourse"
+ onchange="updateLessonSelect()"
+></select>
 
+  <select id="planLesson"></select>
+  
   <br><br>
 
   <input
@@ -1254,17 +1259,15 @@ function addPlan(){
  }
 
  document.getElementById(
-  "addPlanForm"
- ).style.display = "block";
+ "planCourse"
+).innerHTML =
+courses.map((course,i)=>`
 
- document.getElementById(
-  "planCourse"
- ).innerHTML =
- courses.map((course,i)=>`
- <option value="${i}">
-  ${course.subject}｜${course.name}
- </option>
- `).join("");
+<option value="${i}">
+ ${course.subject}｜${course.name}
+</option>
+
+`).join("");
 
 }
 
@@ -1331,7 +1334,46 @@ function closePlanForm(){
 
 }
 
+function updateLessonSelect(){
 
+ const courseIndex =
+ Number(
+  document.getElementById(
+   "planCourse"
+  ).value
+ );
+
+ const lessonIndex =
+ Number(
+  document.getElementById(
+   "planLesson"
+  ).value
+ );
+ 
+ const course =
+ courses[p.courseIndex];
+
+ return `
+ ${course.name}
+ 第${p.lessonIndex+1}講
+ `;
+
+ plans.push({
+ day:selectedDay,
+ courseIndex,
+ lessonIndex
+ });
+
+ document.getElementById(
+  "planLesson"
+ ).innerHTML =
+ course.lesson.map((_,i)=>`
+ <option value="${i}">
+  第${i+1}講
+ </option>
+ `).join("");
+
+}
  
  window.openDay = openDay;
  window.deletePlan = deletePlan;
