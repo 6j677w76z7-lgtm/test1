@@ -441,6 +441,16 @@
   <div id="calendar"></div>
  
 </div>
+
+<div class="card">
+
+  <h2 id="selectedDate">
+    日付を選択
+  </h2>
+
+  <div id="dayPlanList"></div>
+
+</div>
  
 </div>
  
@@ -463,7 +473,7 @@ function toggleHistory(){
  }
  
  }
- 
+
 const examDate=new Date("2027-01-16");
 
 window.courses=
@@ -549,7 +559,11 @@ JSON.parse(
  localStorage.getItem("plans")
 ) || [];
 
- 
+
+
+
+
+let selectedDay = null;
 
  
 
@@ -1101,75 +1115,80 @@ function renderCalendar(){
 
 function openDay(day){
 
+selectedDay = day;
+ 
 const dayPlans =
  plans.filter(
   p => p.day === day
  );
 
-const list =
+document.getElementById(
+  "selectedDate"
+ ).innerText =
+ `${day}日の予定`;
+
+ document.getElementById(
+  "dayPlanList"
+ ).innerHTML =
  dayPlans
- .map((p,i) =>
-  `${i+1}. ${p.text}`
- )
- .join("\n");
+ .map((p,i)=>`
+ <div
+  style="
+  display:flex;
+  justify-content:space-between;
+  margin:8px 0;
+  "
+ >
 
- const result =
- prompt(
- `${day}日の予定\n\n` +
- (list || "予定なし") +
- "\n\n追加する予定を入力\n" +
- "削除は d1 のように入力"
+  <span>${p.text}</span>
+
+  <button
+   onclick="deletePlan(${day},${i})"
+   style="
+   background:#ef4444;
+   padding:4px 8px;
+   "
+  >
+   ✕
+  </button>
+
+ </div>
+ `)
+ .join("");
+
+}
+
+
+
+function deletePlan(day,index){
+
+ const dayPlans =
+ plans.filter(
+  p => p.day === day
  );
-
- if(!result)return;
-if(result.startsWith("d")){
-
- const index =
- Number(
-  result.slice(1)
- ) - 1;
 
  const target =
-  
- plans.findIndex(
-  p =>
-   p.day === day &&
-   dayPlans.includes(p)
+ dayPlans[index];
+
+ const removeIndex =
+ plans.indexOf(target);
+
+ plans.splice(
+  removeIndex,
+  1
  );
-
- if(
-  index >= 0 &&
-  index < dayPlans.length
- ){
-
-  const targetPlan =
-   dayPlans[index];
-
-  const removeIndex =
-   plans.indexOf(targetPlan);
-
-  plans.splice(
-   removeIndex,
-   1
-  );
-
-renderCalendar();
-}
- return;
-}
- 
- plans.push({
-  day,
-  text:result
- });
 
  localStorage.setItem(
   "plans",
   JSON.stringify(plans)
  );
 
-renderCalendar();
+ renderCalendar();
+
+ openDay(day);
+
 }
+
 renderCalendar();
  
 </script>
