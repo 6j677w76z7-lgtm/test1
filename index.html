@@ -1185,6 +1185,8 @@ function deletePlan(day,index){
   JSON.stringify(plans)
  );
 
+ window.openDay = openDay;
+ window.deletePlan = deletePlan;
  renderCalendar();
 
  openDay(day);
