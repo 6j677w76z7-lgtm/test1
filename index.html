@@ -1200,18 +1200,22 @@ function deletePlan(day,index){
 
 function addPlan(){
 
- if(selectedDay === null){
-  return;
- }
+ if(selectedDay === null){return;}
 
- const text =
- prompt("予定を入力");
+ const subject =
+ prompt("科目");
 
- if(!text)return;
+ if(!subject)return;
+
+ const lesson =
+ prompt("内容");
+
+ if(!lesson)return;
 
  plans.push({
   day:selectedDay,
-  text
+  subject,
+  lesson
  });
 
  localStorage.setItem(
@@ -1220,8 +1224,9 @@ function addPlan(){
  );
 
  renderCalendar();
-
  openDay(selectedDay);
+
+}
 
 }
 
