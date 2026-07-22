@@ -454,6 +454,12 @@
 
 </div>
  
+<button
+ onclick="addPlan()"
+>
+ ＋予定追加
+</button>
+ 
 </div>
  
 <script>
@@ -1190,6 +1196,36 @@ function deletePlan(day,index){
  renderCalendar();
 
  openDay(day);
+
+}
+
+
+
+
+function addPlan(){
+
+ if(selectedDay === null){
+  return;
+ }
+
+ const text =
+ prompt("予定を入力");
+
+ if(!text)return;
+
+ plans.push({
+  day:selectedDay,
+  text
+ });
+
+ localStorage.setItem(
+  "plans",
+  JSON.stringify(plans)
+ );
+
+ renderCalendar();
+
+ openDay(selectedDay);
 
 }
 
