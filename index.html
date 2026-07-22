@@ -459,7 +459,25 @@
 >
  ＋予定追加
 </button>
- 
+
+<div id="addPlanForm" style="display:none;">
+
+ <select id="planSubject">
+  <option>数学</option>
+  <option>英語</option>
+  <option>物理</option>
+ </select>
+
+ <input
+  id="planLesson"
+  placeholder="内容"
+ >
+
+ <button onclick="savePlan()">
+  追加
+ </button>
+
+</div>
 </div>
  
 <script>
@@ -1203,15 +1221,31 @@ function deletePlan(day,index){
 
 function addPlan(){
 
- if(selectedDay === null){return;}
+ if(selectedDay === null){
+  alert("先に日付を選択してください");
+  return;
+ }
+
+ document.getElementById(
+  "addPlanForm"
+ ).style.display = "block";
+
+}
+
+
+
+
+function savePlan(){
 
  const subject =
- prompt("科目");
-
- if(!subject)return;
+ document.getElementById(
+  "planSubject"
+ ).value;
 
  const lesson =
- prompt("内容");
+ document.getElementById(
+  "planLesson"
+ ).value;
 
  if(!lesson)return;
 
@@ -1226,7 +1260,16 @@ function addPlan(){
   JSON.stringify(plans)
  );
 
+ document.getElementById(
+  "planLesson"
+ ).value = "";
+
+ document.getElementById(
+  "addPlanForm"
+ ).style.display = "none";
+
  renderCalendar();
+
  openDay(selectedDay);
 
 }
@@ -1237,6 +1280,8 @@ function addPlan(){
 renderCalendar();
  
 </script>
+
+
 
 <script type="module">
 
