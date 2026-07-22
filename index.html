@@ -460,22 +460,53 @@
  ＋予定追加
 </button>
 
-<div id="addPlanForm" style="display:none;">
+<div
+ id="addPlanForm"
+ style="
+ display:none;
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,.4);
+ z-index:1000;
+ "
+>
 
- <select id="planSubject">
-  <option>数学</option>
-  <option>英語</option>
-  <option>物理</option>
- </select>
-
- <input
-  id="planLesson"
-  placeholder="内容"
+ <div
+  style="
+  background:white;
+  width:300px;
+  padding:20px;
+  border-radius:20px;
+  margin:100px auto;
+  "
  >
 
- <button onclick="savePlan()">
-  追加
- </button>
+  <h3>予定追加</h3>
+
+  <select id="planSubject">
+   <option>数学</option>
+   <option>英語</option>
+   <option>物理</option>
+  </select>
+
+  <br><br>
+
+  <input
+   id="planLesson"
+   placeholder="内容"
+  >
+
+  <br><br>
+
+  <button onclick="savePlan()">
+   追加
+  </button>
+
+  <button onclick="closePlanForm()">
+   キャンセル
+  </button>
+
+ </div>
 
 </div>
 </div>
@@ -1268,12 +1299,28 @@ function savePlan(){
   "addPlanForm"
  ).style.display = "none";
 
+ document.getElementById(
+ "addPlanForm"
+).style.display = "none";
+
  renderCalendar();
 
  openDay(selectedDay);
 
 }
 
+
+ 
+function closePlanForm(){
+
+ document.getElementById(
+  "addPlanForm"
+ ).style.display = "none";
+
+}
+
+
+ 
  window.openDay = openDay;
  window.deletePlan = deletePlan;
  window.addPlan = addPlan;
