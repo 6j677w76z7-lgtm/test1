@@ -1237,32 +1237,34 @@ function deletePlan(day,index){
   JSON.stringify(plans)
  );
 
-}
-
  renderCalendar();
 
  openDay(day);
+}
+
 
 
 
 
 function addPlan(){
 
-  if(selectedDay === null){
+ if(selectedDay === null){
   alert("先に日付を選択してください");
   return;
  }
 
  document.getElementById(
- "planCourse"
-).innerHTML =
-courses.map((course,i)=>`
+  "addPlanForm"
+ ).style.display = "block";
 
-<option value="${i}">
- ${course.subject}｜${course.name}
-</option>
-
-`).join("");
+ document.getElementById(
+  "planCourse"
+ ).innerHTML =
+ courses.map((course,i)=>`
+ <option value="${i}">
+  ${course.subject}｜${course.name}
+ </option>
+ `).join("");
 
  updateLessonSelect();
 
@@ -1290,14 +1292,10 @@ function savePlan(){
   ).value
  );
 
- if(!lesson)return;
-
- plans.push({
+plans.push({
  day:selectedDay,
  courseIndex,
- subject:course.subject,
- courseName:course.name,
- lesson
+ lessonIndex
 });
 
  localStorage.setItem(
@@ -1346,24 +1344,6 @@ function updateLessonSelect(){
 
  const course =
  courses[courseIndex];
-
- const lessonIndex =
- Number(
-  document.getElementById(
-   "planLesson"
-  ).value
- );
-
- return `
- ${course.name}
- 第${p.lessonIndex+1}講
- `;
-
- plans.push({
- day:selectedDay,
- courseIndex,
- lessonIndex
- });
 
  document.getElementById(
   "planLesson"
