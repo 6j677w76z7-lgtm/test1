@@ -1282,9 +1282,6 @@ function savePlan(){
   ).value
  );
 
- const course =
- courses[courseIndex];
-
  const lessonIndex =
  Number(
   document.getElementById(
@@ -1292,11 +1289,11 @@ function savePlan(){
   ).value
  );
 
-plans.push({
- day:selectedDay,
- courseIndex,
- lessonIndex
-});
+ plans.push({
+  day:selectedDay,
+  courseIndex,
+  lessonIndex
+ });
 
  localStorage.setItem(
   "plans",
@@ -1304,16 +1301,8 @@ plans.push({
  );
 
  document.getElementById(
-  "planLesson"
- ).value = "";
-
- document.getElementById(
   "addPlanForm"
  ).style.display = "none";
-
- document.getElementById(
- "addPlanForm"
-).style.display = "none";
 
  renderCalendar();
 
