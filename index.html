@@ -1282,7 +1282,44 @@ function addPlan(){
 }
 
 
+async function savePlans(){
+ 
+try{
 
+  localStorage.setItem(
+   "plans",
+   JSON.stringify(plans)
+  );
+
+  if(!window.db){
+   console.log("dbなし");
+   return;
+  }
+
+  await window.setDoc(
+   window.doc(
+    window.db,
+    "plans",
+    "main"
+   ),
+   {
+    plans
+   }
+  );
+
+  console.log("plans保存成功");
+
+ }catch(err){
+
+  console.error(
+   "plans保存失敗",
+   err
+  );
+
+ }
+
+}
+ 
 
 async function savePlan(){
 
