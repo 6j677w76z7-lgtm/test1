@@ -1017,24 +1017,24 @@ ${
 `;
 
 
-const todayStr =
- new Date().toLocaleDateString("ja-JP");
-
+const today =
+ new Date().getDate();
+ 
 const tomorrowObj =
  new Date();
 
-tomorrowObj.setDate(
+ tomorrowObj.setDate(
  tomorrowObj.getDate()+1
 );
 
-const tomorrowStr =
- tomorrowObj.toLocaleDateString("ja-JP");
+const tomorrow =
+ tomorrowObj.getDate();
 
 document.getElementById(
  "todayPlans"
 ).innerHTML =
 plans
-.filter(p=>p.date===todayStr)
+.filter(p=>p.day===today)
 .map(p=>`
 <label>
 <input
@@ -1042,15 +1042,15 @@ plans
  ${p.done?"checked":""}
 >
  ${courses[p.courseIndex]?.name}
-第${p.lessonIndex+1}講
+ 第${p.lessonIndex+1}講
 </label><br>
 `).join("");
-
+ 
 document.getElementById(
  "tomorrowPlans"
 ).innerHTML =
 plans
-.filter(p=>p.date===tomorrowStr)
+.filter(p=>p.day===tomorrow)
 .map(p=>`
 <label>
 <input
@@ -1058,10 +1058,10 @@ plans
  ${p.done?"checked":""}
 >
  ${courses[p.courseIndex]?.name}
-第${p.lessonIndex+1}講
+ 第${p.lessonIndex+1}講
 </label><br>
 `).join("");
-
+ 
 }
 
 window.render = render;
