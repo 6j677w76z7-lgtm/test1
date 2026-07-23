@@ -270,12 +270,12 @@
 .calendar-day{
   background:#f8fafc;
   border-radius:12px;
-  min-height:80px;
+  min-height:120px;
+  max-height:120px;
+  overflow-y:auto;
   padding:8px;
-  cursor:pointer;
-  transition:.2s;
 }
-
+  
 .calendar-day:hover{
   background:#eef4ff;
 }
@@ -1125,10 +1125,12 @@ function renderCalendar(){
  );
 
  const preview =
- dayPlans.length
- ? `${courses[dayPlans[0].courseIndex].name}
-    第${dayPlans[0].lessonIndex+1}講`
- : "";
+ dayPlans.map(p=>`
+ <div style="font-size:11px;">
+  ${courses[p.courseIndex]?.name}
+  第${p.lessonIndex+1}講
+ </div>
+ `).join("");
   
  const count =
  dayPlans.length;
