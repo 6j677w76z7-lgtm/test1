@@ -1282,6 +1282,28 @@ function addPlan(){
 
 
 
+async function savePlans(){
+
+ localStorage.setItem(
+  "plans",
+  JSON.stringify(plans)
+ );
+
+ if(!window.db)return;
+
+ await window.setDoc(
+  window.doc(window.db,"plans","main"),
+  {
+   plans
+  }
+ );
+
+}
+
+
+
+ 
+
 function savePlan(){
 
  const courseIndex =
@@ -1304,10 +1326,7 @@ function savePlan(){
   lessonIndex
  });
 
- localStorage.setItem(
-  "plans",
-  JSON.stringify(plans)
- );
+ savePlans();
 
  document.getElementById(
   "addPlanForm"
@@ -1318,6 +1337,7 @@ function savePlan(){
  openDay(selectedDay);
 
 }
+ 
 
 
  
@@ -1411,6 +1431,29 @@ async function loadCourses(){
  }
 
  window.render();
+}
+
+await loadPlans();
+
+async function loadPlans(){
+
+ const snap =
+ await getDoc(
+  doc(db,"plans","main")
+ );
+
+ if(snap.exists()){
+
+  plans.length = 0;
+
+  plans.push(
+   ...snap.data().plans
+  );
+
+ }
+
+ renderCalendar();
+
 }
 
 console.log("Firestore接続成功");
