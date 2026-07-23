@@ -1284,29 +1284,7 @@ function addPlan(){
 
 
 
-async function savePlans(){
-
- localStorage.setItem(
-  "plans",
-  JSON.stringify(plans)
- );
-
- if(!window.db)return;
-
- await window.setDoc(
-  window.doc(window.db,"plans","main"),
-  {
-   plans
-  }
- );
-
-}
-
-
-
- 
-
-function savePlan(){
+async function savePlan(){
 
  const courseIndex =
  Number(
@@ -1328,17 +1306,17 @@ function savePlan(){
   lessonIndex
  });
 
- savePlans();
+ await savePlans();
 
  document.getElementById(
   "addPlanForm"
  ).style.display = "none";
 
  renderCalendar();
-
  openDay(selectedDay);
 
 }
+
  
 
 
