@@ -1452,9 +1452,19 @@ async function loadPlans(){
    ...snap.data().plans
   );
 
+  console.log("Firestore plans",
+   snap.data().plans
+  );
+
  }
 
+ render();
  renderCalendar();
+
+ if(selectedDay){
+  openDay(selectedDay);
+
+}
 
 }
 
